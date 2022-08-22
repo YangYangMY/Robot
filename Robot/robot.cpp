@@ -137,13 +137,13 @@ void display() {
 	glRotatef(ry, 0, 0.1, 0);
 
 	//For click to rotate left
-	glRotatef(ry1, 0, -0.1, 0);
+	glRotatef(ry1, 0,-0.1, 0);
 
 	//For click to rotate up
-	glRotatef(rx, 0.1, 0, 0);
+	glRotatef(rx, -0.1, 0, 0);
 
 	//For click to rotate down
-	glRotatef(rx1, -0.1, 0, 0);
+	glRotatef(rx1, 0.1, 0, 0);
 
 	DrawSphere(3);
 
