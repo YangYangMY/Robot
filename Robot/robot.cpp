@@ -197,7 +197,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(-8.0, 8.0, -8.0,8.0, -8.0, 8.0);
+	glOrtho(-10.0, 10.0, -10.0, 10.0, -10.0, 10.0);
 
 	while (true)
 	{
