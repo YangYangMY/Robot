@@ -55,9 +55,9 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 
 		}
 		else if (wParam == 'W')
-			pty -= ptSpeed;
-		else if (wParam == 'S')
 			pty += ptSpeed;
+		else if (wParam == 'S')
+			pty -= ptSpeed;
 		else if (wParam == 'O')
 			isOrtho = true;
 		else if (wParam == 'P')
@@ -394,13 +394,36 @@ GLuint loadTexture(LPCSTR filename) {
 }
 
 void drawBody() {
-	glColor3f(1, 1, 1);
+	//most bottom part of body - middle 
+	
 	glPushMatrix();
-	glBegin(GL_POLYGON);
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);
 	glVertex3f(0, 0, 0);
-	glVertex3f(0.5, 0, 0);
-	glVertex3f(0.5, 0.5, 0);
-	glVertex3f(0, 0.5, 0);
+	glVertex3f(0, 0, 1);
+	glVertex3f(1, 0, 1);
+	glVertex3f(1, 0, 0);
+
+	glColor3f(1, 1, 1);
+	glVertex3f(1, 0, 0);
+	//glVertex3f()
+
+//	glVertex3f(0, 0, 0);
+	//glVertex3f(1, 0, 0);
+	//glVertex3f(1, 1, 0);
+	//glVertex3f(0, 1, 0);
+
+//	glColor3f(1, 0, 0);
+	//glVertex3f(0, 1, 0);
+	//glVertex3f(-0.5, 1.5, 1.5);
+	//glVertex3f(0, 0, 1);
+	//glVertex3f(0, 0, 0);
+
+
+
+	glColor3f(0, 0, 1);
+	
+	//glVertex3f()
 	glEnd();
 	glPopMatrix();
 }
