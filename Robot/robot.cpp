@@ -393,6 +393,17 @@ GLuint loadTexture(LPCSTR filename) {
 	return texture;
 }
 
+void drawBody() {
+	glColor3f(1, 1, 1);
+	glPushMatrix();
+	glBegin(GL_POLYGON);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0.5, 0, 0);
+	glVertex3f(0.5, 0.5, 0);
+	glVertex3f(0, 0.5, 0);
+	glEnd();
+	glPopMatrix();
+}
 
 void display() {
 	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
@@ -421,7 +432,7 @@ void display() {
 	//glPopMatrix();
 
 
-
+	drawBody();
 
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
