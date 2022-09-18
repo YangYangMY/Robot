@@ -395,35 +395,46 @@ GLuint loadTexture(LPCSTR filename) {
 
 void drawBody() {
 	//most bottom part of body - middle 
-	
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, 0, 1);
-	glVertex3f(1, 0, 1);
-	glVertex3f(1, 0, 0);
-
 	glColor3f(1, 1, 1);
-	glVertex3f(1, 0, 0);
-	//glVertex3f()
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(0, 0, 0);
+	glVertex3f(1.5, 0, 0);
+	glColor3f(1.5, 0, 0);
+	glVertex3f(1.5, -0.25, 1);
+	glVertex3f(0, -0.25, 1);
 
-//	glVertex3f(0, 0, 0);
-	//glVertex3f(1, 0, 0);
-	//glVertex3f(1, 1, 0);
-	//glVertex3f(0, 1, 0);
+	glColor3f(1, 0, 1); //PINK
+	glVertex3f(0, -0.25, 1);
+	glVertex3f(-0.2, 2,1.5);
+	glVertex3f(0, 1.5, 0);
+	glVertex3f(0, 0, 0);
 
-//	glColor3f(1, 0, 0);
-	//glVertex3f(0, 1, 0);
-	//glVertex3f(-0.5, 1.5, 1.5);
-	//glVertex3f(0, 0, 1);
-	//glVertex3f(0, 0, 0);
+	glColor3f(0, 1, 0);	//green
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 1.5, 0);
+	glVertex3f(1.5, 1.5, 0);
+	glVertex3f(1.5, 0, 0);
 
 
+	glColor3f(0, 0, 1);		//blue
+	glVertex3f(1.5, 0, 0);
+	glVertex3f(1.5, 1.5, 0);
+	glVertex3f(1.7, 2, 1.5);
+	glVertex3f(1.5, -0.25, 1);
 
-	glColor3f(0, 0, 1);
-	
-	//glVertex3f()
+	glColor3f(1, 1, 1);			//white
+	glVertex3f(1.5, -0.25, 1);
+	glVertex3f(0, -0.25, 1);
+	glVertex3f(-0.2, 2, 1.5);
+	glVertex3f(1.7, 2, 1.5);
+
+	glColor3f(1, 1, 0);
+	glVertex3f(1.7, 2, 1.5);
+	glVertex3f(-0.2, 2, 1.5);
+	glVertex3f(0, 1.5, 0);
+	glVertex3f(1.5, 1.5, 0);
 	glEnd();
 	glPopMatrix();
 }
