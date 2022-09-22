@@ -364,6 +364,79 @@ void drawTextureRectangle(double l, double w, double h) {
 	glEnd();
 }
 
+void drawShape(float downMinX, float downMaxX, float upMinX, float upMaxX, float downMinY, float downMaxY, float upMinY, float upMaxY, float downMinZ, float downMaxZ, float upMinZ, float upMaxZ) {
+	//Back
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(upMinX, upMinY, upMinZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(downMinX, downMinY, downMinZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(downMaxX, downMaxY, downMinZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(upMaxX, upMaxY, upMinZ);
+	glEnd();
+
+	//Bottom
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(downMinX, downMinY, downMinZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(downMaxX, downMaxY, downMinZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(downMaxX, downMaxY, downMaxZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(downMinX, downMinY, downMaxZ);
+	glEnd();
+
+	//Left
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(upMaxX, upMaxY, upMinZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(downMaxX, downMaxY, downMinZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(downMaxX, downMaxY, downMaxZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(upMaxX, upMaxY, upMaxZ);
+	glEnd();
+
+	//Top
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(upMaxX, upMaxY, upMinZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(upMinX, upMinY, upMinZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(upMinX, upMinY, upMaxZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(upMaxX, upMaxY, upMaxZ);
+	glEnd();
+
+	//Right
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(upMinX, upMinY, upMinZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(downMinX, downMinY, downMinZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(downMinX, downMinY, downMaxZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(upMinX, upMinY, upMaxZ);
+	glEnd();
+
+	//Front
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(upMinX, upMinY, upMaxZ);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(downMinX, downMinY, downMaxZ);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(downMaxX, downMaxY, downMaxZ);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(upMaxX, upMaxY, upMaxZ);
+	glEnd();
+}
 
 
 GLuint loadTexture(LPCSTR filename) {
