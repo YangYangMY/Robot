@@ -127,29 +127,6 @@ bool initPixelFormat(HDC hdc)
 	}
 }
 //--------------------------------------------------------------------
-void drawSphereWithoutGLU()
-{
-	const float PI = 3.141592f;
-	GLfloat x, y, z, sliceA, stackA;
-	GLfloat radius = 0.5;
-	int sliceNo = 30, stackNo = 30;
-	for (sliceA = 0.0; sliceA < PI; sliceA += PI / sliceNo)
-	{
-		glBegin(GL_LINE_STRIP);
-		for (stackA = 0.0; stackA < PI; stackA += PI / stackNo)
-		{
-			x = radius * cos(stackA) * sin(sliceA);
-			y = radius * sin(stackA) * sin(sliceA);
-			z = radius * cos(sliceA);
-			glVertex3f(x, y, z);
-			x = radius * cos(stackA) * sin(sliceA + PI / stackNo);
-			y = radius * sin(stackA) * sin(sliceA + PI / sliceNo);
-			z = radius * cos(sliceA + PI / sliceNo);
-			glVertex3f(x, y, z);
-		}
-		glEnd();
-	}
-}
 
 void DrawSphere(double r) {
 
@@ -164,204 +141,6 @@ void DrawSphere(double r) {
 	gluSphere(sphere, r, 30, 30);
 	gluDeleteQuadric(sphere);
 
-}
-
-void drawCube(float length) {
-	glBegin(GL_QUADS);
-	// Face 1 : Bottom
-	glVertex3f(0.0f, 0.0f, length);
-	glVertex3f(length, 0.0f, length);
-	glVertex3f(length, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-
-
-	// Face 2 : Left
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, length, 0);
-	glVertex3f(0, length, length);
-	glVertex3f(0, 0, length);
-
-	// Face 3 : Front
-	glVertex3f(0, 0, length);
-	glVertex3f(0, length, length);
-	glVertex3f(length, length, length);
-	glVertex3f(length, 0, length);
-
-	// Face 4 : Right
-	glVertex3f(length, 0, length);
-	glVertex3f(length, 0, 0);
-	glVertex3f(length, length, 0);
-	glVertex3f(length, length, length);
-
-	// Face 5 : Top
-	glVertex3f(length, length, length);
-	glVertex3f(0, length, length);
-	glVertex3f(0, length, 0);
-	glVertex3f(length, length, 0);
-
-	// Face 6 : Back
-	glVertex3f(length, length, 0);
-	glVertex3f(0, length, 0);
-	glVertex3f(0, 0, 0);
-	glVertex3f(length, 0, 0);
-	glEnd();
-}
-
-void DrawCylinder(double br, double tr, double h) {
-
-
-	GLUquadricObj* cylinder = NULL;
-	cylinder = gluNewQuadric();
-	gluQuadricDrawStyle(cylinder, GLU_FILL);
-	gluCylinder(cylinder, br, tr, h, 10, 10);
-	gluDeleteQuadric(cylinder);
-}
-
-void projection() {
-	glMatrixMode(GL_PROJECTION);  //refer to porjetion matrix
-	glLoadIdentity();				// reset to project matrix
-
-	glTranslatef(ptx, pty, ptz);		//translate for projection matrix
-	glRotatef(pry, 0.0, 1.0, 0.0);		//rotate y-axis for projection
-	glRotatef(pxy, 1.0, 0.0, 0.0);		//rotate x-axis for projection
-	glRotatef(pzy, 0.0, 0.0, 1.0);		//rotate x-axis for projection
-
-
-	//Ortho View
-	glOrtho(-10.0, 10.0, -10.0, 10.0, ONear, OFar);
-
-	//if (isOrtho) {
-		//Ortho View
-	//	glOrtho(-10.0, 10.0, -10.0, 10.0, ONear, OFar);
-	//}
-	//else {
-		//Perspective View
-	//	gluPerspective(20, 1.0, -1, 1);
-	//	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
-	//}
-
-}
-
-void drawRectangle(double l, double w, double h) {
-	glBegin(GL_QUADS);
-	//face 1 down
-	glVertex3f(0, 0, 0);
-	glVertex3f(l, 0, 0);
-	glVertex3f(l, 0, h);
-	glVertex3f(0, 0, h);
-
-	//face 2 face
-	glVertex3f(0, 0, h);
-	glVertex3f(0, w, h);
-	glVertex3f(l, w, h);
-	glVertex3f(l, 0, h);
-
-	//face 3 right
-	glVertex3f(l, 0, h);
-	glVertex3f(l, w, h);
-	glVertex3f(l, w, 0);
-	glVertex3f(l, 0, 0);
-
-	//face 4 face bottom
-	glVertex3f(l, 0, 0);
-	glVertex3f(0, 0, 0);
-	glVertex3f(0, w, 0);
-	glVertex3f(l, w, 0);
-
-	//face 5 above
-	glVertex3f(l, w, 0);
-	glVertex3f(l, w, h);
-	glVertex3f(0, w, h);
-	glVertex3f(0, w, 0);
-
-	//face 6 left
-	glVertex3f(0, w, 0);
-	glVertex3f(0, w, h);
-	glVertex3f(0, 0, h);
-	glVertex3f(0, 0, 0);
-	glEnd();
-}
-
-void drawTextureRectangle(double l, double w, double h) {
-	glBegin(GL_QUADS);
-	//face 1 down
-	glTexCoord2f(0, 1);
-	glVertex3f(0, 0, 0);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(l, 0, 0);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(l, 0, h);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(0, 0, h);
-
-	//face 2 face
-	glTexCoord2f(0, 1);
-	glVertex3f(0, 0, h);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(0, w, h);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(l, w, h);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(l, 0, h);
-
-	//face 3 right
-	glTexCoord2f(0, 1);
-	glVertex3f(l, 0, h);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(l, w, h);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(l, w, 0);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(l, 0, 0);
-
-	//face 4 face bottom
-	glTexCoord2f(0, 1);
-	glVertex3f(l, 0, 0);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(0, 0, 0);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(0, w, 0);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(l, w, 0);
-
-	//face 5 above
-	glTexCoord2f(0, 1);
-	glVertex3f(l, w, 0);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(l, w, h);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(0, w, h);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(0, w, 0);
-
-	//face 6 left
-	glTexCoord2f(0, 1);
-	glVertex3f(0, w, 0);
-
-	glTexCoord2f(1, 1);
-	glVertex3f(0, w, h);
-
-	glTexCoord2f(1, 0);
-	glVertex3f(0, 0, h);
-
-	glTexCoord2f(0, 0);
-	glVertex3f(0, 0, 0);
-	glEnd();
 }
 
 void drawShape(float downMinX, float downMaxX, float upMinX, float upMaxX, float downMinY, float downMaxY, float upMinY, float upMaxY, float downMinZ, float downMaxZ, float upMinZ, float upMaxZ) {
@@ -437,6 +216,190 @@ void drawShape(float downMinX, float downMaxX, float upMinX, float upMaxX, float
 	glVertex3f(upMaxX, upMaxY, upMaxZ);
 	glEnd();
 }
+
+void drawCube(float length) {
+	glBegin(GL_QUADS);
+	// Face 1 : Bottom
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, length);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(length, 0.0f, length);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(length, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+
+
+	// Face 2 : Left
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, length, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(0, length, length);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0, 0, length);
+
+	// Face 3 : Front
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 0, length);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, length, length);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(length, length, length);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(length, 0, length);
+
+	// Face 4 : Right
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(length, 0, length);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(length, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(length, length, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(length, length, length);
+
+	// Face 5 : Top
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(length, length, length);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, length, length);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(0, length, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(length, length, 0);
+
+	// Face 6 : Back
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(length, length, 0);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, length, 0);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(length, 0, 0);
+	glEnd();
+}
+
+void DrawCylinder(double br, double tr, double h) {
+
+
+	GLUquadricObj* cylinder = NULL;
+	cylinder = gluNewQuadric();
+	gluQuadricDrawStyle(cylinder, GLU_FILL);
+	gluQuadricTexture(cylinder, true);
+	gluCylinder(cylinder, br, tr, h, 10, 10);
+	gluDeleteQuadric(cylinder);
+}
+
+void drawRectangle(double l, double w, double h) {
+	glBegin(GL_QUADS);
+	//face 1 down
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, 0, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, 0, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, h);
+
+	//face 2 face
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 0, h);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, 0, h);
+
+	//face 3 right
+	glTexCoord2f(0, 1);
+	glVertex3f(l, 0, h);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, w, 0);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, 0, 0);
+
+	//face 4 face bottom
+	glTexCoord2f(0, 1);
+	glVertex3f(l, 0, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, w, 0);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, w, 0);
+
+	//face 5 above
+	glTexCoord2f(0, 1);
+	glVertex3f(l, w, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, w, 0);
+
+	//face 6 left
+	glTexCoord2f(0, 1);
+	glVertex3f(0, w, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, 0, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, 0);
+	glEnd();
+}
+
+void projection() {
+	glMatrixMode(GL_PROJECTION);  //refer to porjetion matrix
+	glLoadIdentity();				// reset to project matrix
+
+	glTranslatef(ptx, pty, ptz);		//translate for projection matrix
+	glRotatef(pry, 0.0, 1.0, 0.0);		//rotate y-axis for projection
+	glRotatef(pxy, 1.0, 0.0, 0.0);		//rotate x-axis for projection
+	glRotatef(pzy, 0.0, 0.0, 1.0);		//rotate x-axis for projection
+
+	if (isOrtho) {
+		//Ortho View
+		glOrtho(-10.0, 10.0, -10.0, 10.0, ONear, OFar);
+	}
+	else {
+		//Perspective View
+	gluPerspective(20, 1.0, -1, 1);
+	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
+	}
+
+}
+
+
+
+
+
 
 
 GLuint loadTexture(LPCSTR filename) {
@@ -622,6 +585,7 @@ void drawWaist() {
 	glColor3f(1, 1, 1);
 	glVertex3f(4, 2, 1.35);
 
+	
 	glColor3f(0, 1, 0);		//BEHIND
 	glVertex3f(4, 2, 1.35);
 	glVertex3f(1.7, 2, 1.3);
@@ -637,7 +601,6 @@ void drawWaist() {
 	glPopMatrix();
 
 	//Left Top
-
 	glPushMatrix();
 	glRotatef(180, 1, 0, 0);
 	glBegin(GL_QUADS);
@@ -660,11 +623,11 @@ void drawWaist() {
 	glVertex3f(0, 1.5, 2.6);
 	glVertex3f(-2.1, 1.6, 2.6);
 
-	//glVertex3f(-2.1, 1.6, 2.6);		//Above
-	//glVertex3f(-3, -0.5, 4);
-	//glVertex3f(0, -0.5, 3);
-	//glColor3f(1, 1, 1);
-	//glVertex3f(0, 1.5, 2.6);
+	glVertex3f(-2.1, 1.6, 2.6);		//Above
+	glVertex3f(-3, -0.5, 4);
+	glVertex3f(0, -0.5, 3);
+	glColor3f(1, 1, 1);
+	glVertex3f(0, 1.5, 2.6);
 	
 	
 	glVertex3f(0, 1.5, 2.6);		//right
@@ -672,12 +635,52 @@ void drawWaist() {
 	glVertex3f(0, -0.17, 0.7);
 	glColor3f(1, 0, 0);
 	glVertex3f(0, -0.5, 3);
-	
-
-
-
 	glEnd();
 	glPopMatrix();
+
+	//Right Top
+
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 1);
+
+	glVertex3f(1.5, -0.17, 0.7);		//front 
+	glVertex3f(1.5, -0.5, 3);
+	glVertex3f(4.5, -0.5, 4);
+	glVertex3f(4.5, -0.17, 2);
+
+	glColor3f(1, 1, 1);
+	glVertex3f(4.5, -0.17, 2);		//left
+	glVertex3f(4.5, -0.5, 4);
+	glVertex3f(3.6, 1.6, 2.6);
+	glVertex3f(4, 2, 1.35);
+
+	glColor3f(0, 0, 0);			//behind
+	glVertex3f(4, 2, 1.35);
+	glVertex3f(1.7, 2, 1.3);
+	glVertex3f(1.5, 1.5, 2.6);
+	glVertex3f(3.6, 1.6, 2.6);
+
+	glVertex3f(3.6, 1.6, 2.6);		//Above
+	glVertex3f(4.5, -0.5, 4);
+	glVertex3f(1.5, -0.5, 3);
+	glColor3f(2.5, 1, 1);
+	glVertex3f(1.5, 1.5, 2.6);
+
+
+	glVertex3f(1.5, 1.5, 2.6);		//right
+	glColor3f(0, 0, 0);
+	glVertex3f(1.5, -0.17, 0.7);
+	glColor3f(1, 0, 0);
+	glVertex3f(1.5, -0.5, 3);
+	glEnd();
+	glPopMatrix();
+}
+
+void drawBody() {
+	glColor3f(1, 1, 1);
+	drawShape(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);
 }
 
 void display() {
@@ -699,15 +702,10 @@ void display() {
 	glRotatef(90, 1.0, 0.0, 0.0);
 	//--------------------START OF DESIGN-----------------------------------------------------
 
-	//water
-	//glPushMatrix();
-	//textureArr[0] = loadTexture("texture/water.bmp");
-	//drawTextureRectangle(15, 10, 0.2);
-	//glDeleteTextures(1, &textureArr[0]);
-	//glPopMatrix();
 
 
-	drawWaist();
+	//drawWaist();
+	drawBody();
 
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
