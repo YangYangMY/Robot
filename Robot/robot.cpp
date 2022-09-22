@@ -393,48 +393,216 @@ GLuint loadTexture(LPCSTR filename) {
 	return texture;
 }
 
-void drawBody() {
-	//most bottom part of body - middle 
+void drawWaist() {
+	//middle DOWN
 	glColor3f(1, 1, 1);
 	glPushMatrix();
 	glRotatef(180, 1, 0, 0);
 	glBegin(GL_QUADS);
-	glVertex3f(0, 0, 0);
+	glVertex3f(0, 0, 0);	//front
 	glVertex3f(1.5, 0, 0);
-	glColor3f(1.5, 0, 0);
+	glColor3f(1, 0, 0);
 	glVertex3f(1.5, -0.25, 1);
 	glVertex3f(0, -0.25, 1);
 
-	glColor3f(1, 0, 1); //PINK
+	glColor3f(1, 0, 1); //PINK		left
 	glVertex3f(0, -0.25, 1);
 	glVertex3f(-0.2, 2,1.5);
 	glVertex3f(0, 1.5, 0);
 	glVertex3f(0, 0, 0);
 
-	glColor3f(0, 1, 0);	//green
+	glColor3f(0, 1, 0);	//green			bottom
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 1.5, 0);
 	glVertex3f(1.5, 1.5, 0);
 	glVertex3f(1.5, 0, 0);
 
 
-	glColor3f(0, 0, 1);		//blue
+	glColor3f(0, 0, 1);		//blue		right
 	glVertex3f(1.5, 0, 0);
 	glVertex3f(1.5, 1.5, 0);
 	glVertex3f(1.7, 2, 1.5);
 	glVertex3f(1.5, -0.25, 1);
 
-	glColor3f(1, 1, 1);			//white
+	glColor3f(1, 1, 1);			//white			above
 	glVertex3f(1.5, -0.25, 1);
 	glVertex3f(0, -0.25, 1);
 	glVertex3f(-0.2, 2, 1.5);
 	glVertex3f(1.7, 2, 1.5);
 
-	glColor3f(1, 1, 0);
+	glColor3f(1, 1, 0);		//yellow		back
 	glVertex3f(1.7, 2, 1.5);
 	glVertex3f(-0.2, 2, 1.5);
+	glColor3f(1, 1, 0);
 	glVertex3f(0, 1.5, 0);
 	glVertex3f(1.5, 1.5, 0);
+	glEnd();
+	glPopMatrix();
+
+	//middle UP
+	glColor3f(1, 1, 1);	
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(1.5, -0.25, 1);		//bottom
+	glVertex3f(0, -0.25, 1);
+	glVertex3f(-0.2, 2, 1.5);
+	glVertex3f(1.7, 2, 1.5);
+
+	glVertex3f(1.7, 2, 1.5);	//back
+	glVertex3f(-0.2, 2, 1.5);
+	glColor3f(1, 0, 0);
+	glVertex3f(0, 1.5, 3);
+	glColor3f(1, 0, 1);
+	glVertex3f(1.5, 1.5, 3);
+
+	glColor3f(0, 0, 1);			//above
+	glVertex3f(1.5, 1.5, 3);
+	glColor3f(0, 0, 0);
+	glVertex3f(1.5, -0.5, 3);
+	glVertex3f(0, -0.5, 3);
+	glColor3f(0, 1, 1);
+	glVertex3f(0, 1.5, 3);
+
+	glColor3f(0, 1, 0);		//left
+	glVertex3f(0, 1.5, 3);
+	glVertex3f(-0.2, 2, 1.5);
+	glVertex3f(0, -0.25, 1);
+	glVertex3f(0, -0.5, 3);
+
+	glColor3f(1, 0.5, 0);			//front
+	glVertex3f(0, -0.5, 3);
+	glVertex3f(0, -0.25, 1);
+	glVertex3f(1.5, -0.25, 1);
+	glVertex3f(1.5, -0.5, 3);
+
+
+	glColor3f(1, 0, 0);			//right
+	glVertex3f(1.5, -0.5, 3);
+	glVertex3f(1.5, -0.25, 1);
+	glVertex3f(1.7, 2, 1.5);
+	glVertex3f(1.5, 1.5, 3);
+
+	glEnd();
+	glPopMatrix();
+
+
+	//LEFT Bottom
+	glColor3f(1, 1, 1);
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(0, 0, 0);				//front
+	glVertex3f(-3, -0.17, 1);
+	glVertex3f(-3, -0.17, 2);
+	glVertex3f(0, -0.17, 0.7);
+
+	glColor3f(1, 0, 1);				//above
+	glVertex3f(0, -0.17, 0.7);
+	glVertex3f(-0.2, 2, 1.3);
+	glVertex3f(-2.5, 2, 1.35);
+	glColor3f(1, 0, 0);
+	glVertex3f(-3, -0.17, 2);
+
+	glColor3f(0, 0, 1);				//left 
+	glVertex3f(-3, -0.17, 2);
+	glVertex3f(-3, -0.17, 1);
+	glVertex3f(-2.5, 2, 0.35);
+	glColor3f(1, 1, 1);
+	glVertex3f(-2.5, 2, 1.35);
+
+	glColor3f(0, 1,0);		//BEHIND
+	glVertex3f(-2.5, 2, 1.35);
+	glVertex3f(-0.2, 2, 1.3);
+	glVertex3f(0, 1.5, 0);
+	glVertex3f(-2.5, 2, 0.35);
+
+	glColor3f(0, 0, 0);			//BELOW
+	glVertex3f(-2.5, 2, 0.35);
+	glVertex3f(-3, -0.17,1);
+	glVertex3f(0, 0, 0);
+	glVertex3f(0, 1.5, 0);
+	glEnd();
+	glPopMatrix();
+
+	//RIGHT Bottom
+	glColor3f(1, 1, 1);
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glVertex3f(1.5, 0, 0);				//front
+	glVertex3f(4.5, -0.17, 1);
+	glVertex3f(4.5, -0.17, 2);
+	glVertex3f(1.5, -0.17, 0.7);
+
+	glColor3f(1, 0, 1);				//above
+	glVertex3f(1.5, -0.17, 0.7);
+	glVertex3f(1.7, 2, 1.3);
+	glVertex3f(4, 2, 1.35);
+	glColor3f(1, 0, 0);
+	glVertex3f(4.5, -0.17, 2);
+
+	glColor3f(0, 0, 1);				//right 
+	glVertex3f(4.5, -0.17, 2);
+	glVertex3f(4.5, -0.17, 1);
+	glVertex3f(4, 2, 0.35);
+	glColor3f(1, 1, 1);
+	glVertex3f(4, 2, 1.35);
+
+	glColor3f(0, 1, 0);		//BEHIND
+	glVertex3f(4, 2, 1.35);
+	glVertex3f(1.7, 2, 1.3);
+	glVertex3f(1.5, 1.5, 0);
+	glVertex3f(4, 2, 0.35);
+
+	glColor3f(0, 0, 0);			//BELOW
+	glVertex3f(4, 2, 0.35);
+	glVertex3f(4.5, -0.17, 1);
+	glVertex3f(1.5, 0, 0);
+	glVertex3f(1.5, 1.5, 0);
+	glEnd();
+	glPopMatrix();
+
+	//Left Top
+
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);
+	glBegin(GL_QUADS);
+	glColor3f(1, 0, 1);
+
+	glVertex3f(0, -0.17, 0.7);		//front 
+	glVertex3f(0, -0.5, 3);
+	glVertex3f(-3, -0.5, 4);
+	glVertex3f(-3, -0.17, 2);
+
+	glColor3f(1, 1, 1);
+	glVertex3f(-3, -0.17, 2);		//left
+	glVertex3f(-3, -0.5, 4);
+	glVertex3f(-2.1, 1.6, 2.6);
+	glVertex3f(-2.5, 2, 1.35);
+
+	glColor3f(0, 0, 0);			//behind
+	glVertex3f(-2.5, 2, 1.35);
+	glVertex3f(-0.2, 2, 1.3);
+	glVertex3f(0, 1.5, 2.6);
+	glVertex3f(-2.1, 1.6, 2.6);
+
+	//glVertex3f(-2.1, 1.6, 2.6);		//Above
+	//glVertex3f(-3, -0.5, 4);
+	//glVertex3f(0, -0.5, 3);
+	//glColor3f(1, 1, 1);
+	//glVertex3f(0, 1.5, 2.6);
+	
+	
+	glVertex3f(0, 1.5, 2.6);		//right
+	glColor3f(0, 0, 0);
+	glVertex3f(0, -0.17, 0.7);
+	glColor3f(1, 0, 0);
+	glVertex3f(0, -0.5, 3);
+	
+
+
+
 	glEnd();
 	glPopMatrix();
 }
@@ -466,7 +634,7 @@ void display() {
 	//glPopMatrix();
 
 
-	drawBody();
+	drawWaist();
 
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
