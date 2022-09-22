@@ -126,7 +126,7 @@ bool initPixelFormat(HDC hdc)
 		return false;
 	}
 }
-//--------------------------------------------------------------------
+//--------------------------------------------------------------------SHAPES and Polygons-------------------------
 
 void DrawSphere(double r) {
 
@@ -375,6 +375,57 @@ void drawRectangle(double l, double w, double h) {
 	glEnd();
 }
 
+void DrawPyramid(float sz) {
+	glBegin(GL_TRIANGLES);           // Begin drawing the pyramid with 4 triangles
+	 // Front
+	glTexCoord2f(0.5, 1);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(-sz, -sz, sz);
+	glTexCoord2f(1, 0);
+	glVertex3f(sz, -sz, sz);
+
+	// Right
+	glTexCoord2f(0.5, 1);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(sz, -sz, sz);
+	glTexCoord2f(1, 0);
+	glVertex3f(sz, -sz, -sz);
+
+	// Back
+	glTexCoord2f(0.5, 1);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(sz, -sz, -sz);
+	glTexCoord2f(1, 0);
+	glVertex3f(-sz, -sz, -sz);
+
+	// Left
+	glTexCoord2f(0.5, 1);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(0, 0);
+	glVertex3f(-sz, -sz, -sz);
+	glTexCoord2f(1, 0);
+	glVertex3f(-sz, -sz, sz);
+	glEnd();   // Done drawing the pyramid
+
+	glBegin(GL_POLYGON);
+	//Bottom
+	glTexCoord2f(0, 0);
+	glVertex3f(-sz, -sz, -sz);
+	glTexCoord2f(0, 1);
+	glVertex3f(sz, -sz, -sz);
+	glTexCoord2f(1, 1);
+	glVertex3f(sz, -sz, sz);
+	glTexCoord2f(1, 0);
+	glVertex3f(-sz, -sz, sz);
+
+	glEnd();
+}
+
+
+//-------------------------------------PROJECTION--------------------------------------------
 void projection() {
 	glMatrixMode(GL_PROJECTION);  //refer to porjetion matrix
 	glLoadIdentity();				// reset to project matrix
@@ -396,12 +447,7 @@ void projection() {
 
 }
 
-
-
-
-
-
-
+//--------------------------------------TEXTURE--------------------------------------------------
 GLuint loadTexture(LPCSTR filename) {
 	//take from Step 1 
 	GLuint texture = 0;			//texture name
@@ -429,6 +475,8 @@ GLuint loadTexture(LPCSTR filename) {
 	return texture;
 }
 
+
+//-----------------------------------Start Draw Robot Function----------------------------------------------------------
 void drawWaist() {
 	//middle DOWN
 	glColor3f(1, 1, 1);
@@ -676,11 +724,120 @@ void drawWaist() {
 	glVertex3f(1.5, -0.5, 3);
 	glEnd();
 	glPopMatrix();
+
+
 }
 
-void drawBody() {
+void drawBody(GLuint* bodytextureArr) {
+	bodytextureArr[0] = loadTexture("blackMetal.bmp");
 	glColor3f(1, 1, 1);
-	drawShape(0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1);
+	//------------------------------------middle bottom Behind
+	glPushMatrix();		
+	glTranslatef(0, -1.5, -7);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.5, 0, 4);		//front view (FROM behind)
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 0, 4);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.4,-0.2,2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.9, -0.2, 2.8);
+
+	//left view (FROM BEHIND)
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.9, -0.2, 2.8);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.5, 0, 4);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.5, 1, 4);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.9, 1, 2.8);
+
+	glTexCoord2f(0.0f, 0.0f);			//above (FROM BEHIND)
+	glVertex3f(1.9, 1, 2.8);		
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.9, -0.2, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.4, -0.2, 2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.4, 1, 2.8);
+
+	glTexCoord2f(0.0f, 0.0f);			//back view (FROM BEHIND)
+	glVertex3f(-0.4, 1, 2.8);		
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.9, 1, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.5, 1, 4);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0, 1, 4);
+	
+					//Right view (FROM BEHIND)
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 1, 4);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.4, 1, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.4, -0.2, 2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(0, 0, 4);
+
+	glTexCoord2f(0.0f, 0.0f);		//bottom view (FROM BEHIND)
+	glVertex3f(0, 0, 4);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0, 1, 4);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.5, 1, 4);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.5, 0, 4);
+
+	glEnd();
+	glPopMatrix();
+
+	//------------------------------middle bottom up 1
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(-0.4, -1.69, -6.2);
+	drawRectangle(2.3, 1, 2);
+	glPopMatrix();
+	glDeleteTextures(1, &bodytextureArr[0]);
+
+
+
+
+	//--------------------------------------FRONT ------------------------------------------------
+	//LEFT SIDE
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);		//back
+	glBegin(GL_QUADS);
+	glVertex3f(0, 1.5, 2.6);		
+	glVertex3f(-2, 1.6, 2.6);
+	glVertex3f(-1.8, 1.6, 10);
+	glVertex3f(0, 1.5, 10);
+
+	glVertex3f(0, 1.5, 10);			//above
+	glVertex3f(0, -0.2, 10);
+	glVertex3f(-1.8, -0.2, 10);
+	glVertex3f(-1.8, 1.6, 10);
+
+	glVertex3f(-1.8, 1.6, 10);		//left	(outside)
+	glVertex3f(-1.8, 1.6, 2.6);
+	glVertex3f(-2, -0.2, 2.6);
+	glVertex3f(-1.8, -0.2, 10);
+
+	glVertex3f(-1.8, -0.2, 10);		//front
+	glVertex3f(-2, -0.2, 2.6);
+	glVertex3f(0, -0.2, 2.6);
+	glVertex3f(0, -0.2, 10);
+	
+	glColor3f(0, 0, 0);
+	glVertex3f(0, -0.2, 10);		//right (inside)
+	glVertex3f(0, -0.2, 2.6);
+	glVertex3f(0, 1.5, 2.6);
+	glVertex3f(0, 1.5, 10);
+	glEnd();
+	glPopMatrix();
+
 }
 
 void display() {
@@ -691,22 +848,22 @@ void display() {
 
 	glMatrixMode(GL_MODELVIEW);		//refer to modelview Matrix
 
-	GLuint textureArr[4];		//initialize texture
+	GLuint bodytextureArr[20];		//initialize texture
 
 	glLoadIdentity();		//reset to modelview matrix
 	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
 
 
 
-	glTranslatef(-8, -4, 0);
-	glRotatef(90, 1.0, 0.0, 0.0);
+
 	//--------------------START OF DESIGN-----------------------------------------------------
 
 
-
-	//drawWaist();
-	drawBody();
-
+	glPushMatrix();
+	glRotatef(90, 1.0, 0.0, 0.0);
+	drawWaist();
+	drawBody(bodytextureArr);
+	glPopMatrix();
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
 
