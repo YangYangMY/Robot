@@ -1164,6 +1164,10 @@ void drawBody(GLuint* bodytextureArr) {
 
 }
 
+void drawChest(GLuint* chesttextureArr) {
+
+}
+
 void display() {
 	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  //clear screen
@@ -1172,8 +1176,9 @@ void display() {
 
 	glMatrixMode(GL_MODELVIEW);		//refer to modelview Matrix
 
-	GLuint bodytextureArr[10];		//initialize texture
-	GLuint waisttextureArr[10];		//initialize texture
+	GLuint bodytextureArr[5];		//initialize texture
+	GLuint waisttextureArr[5];		//initialize texture
+	GLuint chesttextureArr[5];		//initialize texture
 
 	glLoadIdentity();		//reset to modelview matrix
 	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
@@ -1195,6 +1200,9 @@ void display() {
 	glTranslatef(0,0.2,0);
 	drawBody(bodytextureArr);
 	glPopMatrix();
+
+	//Draw Chest
+	drawChest(chesttextureArr);
 
 	glPopMatrix();
 
