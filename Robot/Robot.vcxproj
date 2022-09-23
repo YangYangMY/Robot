@@ -133,11 +133,16 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="blackMetal.bmp" />
+    <Image Include="blueGradient.bmp" />
+    <Image Include="blueMetal.bmp" />
+    <Image Include="darkblueMetal.bmp" />
     <Image Include="greenMetal.bmp" />
+    <Image Include="lightblue.bmp" />
     <Image Include="lightblueMetal.bmp" />
     <Image Include="metal.bmp" />
     <Image Include="redMetal.bmp" />
     <Image Include="water.bmp" />
+    <Image Include="whiteblueMark.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
