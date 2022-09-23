@@ -437,14 +437,13 @@ void projection() {
 
 	if (isOrtho) {
 		//Ortho View
-		glOrtho(-10.0, 10.0, -10.0, 10.0, ONear, OFar);
+		glOrtho(-15.0, 15.0, -15.0, 15.0, ONear, OFar);
 	}
 	else {
 		//Perspective View
 	gluPerspective(20, 1.0, -1, 1);
 	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
 	}
-	
 	glTranslatef(tx, 0, tz);
 }
 
@@ -1166,6 +1165,216 @@ void drawBody(GLuint* bodytextureArr) {
 
 void drawChest(GLuint* chesttextureArr) {
 
+	//-------------------------------------------Front left
+	chesttextureArr[1] = loadTexture("darkblueMetal.bmp");
+	glBegin(GL_QUADS);				//front
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1, 1, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-6, 1, -11);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-7, 1, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.1, 1, -14);
+
+	glTexCoord2f(0.0f, 0.0f);			//back
+	glVertex3f(-0.1, -2.5, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-6, -2.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-7, -2.5, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.1, -2.5, -20);
+
+	glTexCoord2f(0.0f, 0.0f);			//left
+	glVertex3f(-6, 1, -11);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-7, 1, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-7, -2.5, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-6, -2.5, -13);
+
+	glTexCoord2f(0.0f, 0.0f);			//below
+	glVertex3f(-6, -2.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.1, -2.5, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.1, 1, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-6, 1, -11);
+
+
+	glTexCoord2f(0.0f, 0.0f);				//above
+	glVertex3f(-7, -2.5, -20);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.1, -2.5, -20);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-2.1, 1, -14);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-7, 1, -15);
+
+	glTexCoord2f(0.0f, 0.0f);				//right
+	glVertex3f(-2.1, -2.5, -20);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.1, -2.5, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.1, 1, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.1, 1, -14);
+	
+	//-------------------------------------------Front Right
+	glBegin(GL_QUADS);				//front
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(7.5, 1, -11);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(8.5, 1, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.6, 1, -14);
+
+	glTexCoord2f(0.0f, 0.0f);			//back
+	glVertex3f(1.6, -2.5, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(7.5, -2.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(8.5, -2.5, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.6, -2.5, -20);
+
+	glTexCoord2f(0.0f, 0.0f);			//left
+	glVertex3f(7.5, 1, -11);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(8.5, 1, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(8.5, -2.5, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(7.5, -2.5, -13);
+
+	glTexCoord2f(0.0f, 0.0f);			//below
+	glVertex3f(7.5, -2.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.6, -2.5, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(7.5, 1, -11);
+
+
+	glTexCoord2f(0.0f, 0.0f);				//above
+	glVertex3f(8.5, -2.5, -20);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.6, -2.5, -20);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.6, 1, -14);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(8.5, 1, -15);
+
+	glTexCoord2f(0.0f, 0.0f);				//right
+	glVertex3f(3.6, -2.5, -20);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.6, -2.5, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.6, 1, -14);
+
+
+
+
+	glEnd();
+
+	glDeleteTextures(1, &chesttextureArr[1]);
+	chesttextureArr[0] = loadTexture("lightblue.bmp");
+
+	//-------------------------------------------Front middle
+	glBegin(GL_POLYGON);				//front
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1, 1, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.25f, 1.0f);
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(0.75f, 1.0f);
+	glVertex3f(-1, 1, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.5, 1, -15);
+	glEnd();
+
+	glBegin(GL_POLYGON);				//back
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.1, 0, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 0, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.25f, 1.0f);
+	glVertex3f(2.5, 0, -17);
+	glTexCoord2f(0.75f, 1.0f);
+	glVertex3f(-1, 0, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.5, 0, -15);
+	glEnd();
+
+	glBegin(GL_QUADS);				//left
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 0, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.1, 0, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1, 1, -9);
+
+	glTexCoord2f(0.0f, 0.0f);		//top left
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 0, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 0, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1, 1, -17);
+
+	glTexCoord2f(0.0f, 0.0f);		//top Middle
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(2.5, 0, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 0, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1, 1, -17);
+
+	glTexCoord2f(0.0f, 0.0f);		//top Right
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(2.5, 0, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(4, 0, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+
+	glTexCoord2f(0.0f, 0.0f);		//Right
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.6, 0, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(4, 0, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+
+	glTexCoord2f(0.0f, 0.0f);		//Bottom
+	glVertex3f(1.6, 1, -9);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.6, 0, -9);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.1, 0, -9);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1, 1, -9);
+	glEnd();
+	glDeleteTextures(1, &chesttextureArr[0]);
 }
 
 void display() {
@@ -1201,8 +1410,12 @@ void display() {
 	drawBody(bodytextureArr);
 	glPopMatrix();
 
+	glPushMatrix();
+	glScalef(1, 1, 1);
+	glTranslatef(0, -0.5, 0);
 	//Draw Chest
 	drawChest(chesttextureArr);
+	glPopMatrix();
 
 	glPopMatrix();
 
