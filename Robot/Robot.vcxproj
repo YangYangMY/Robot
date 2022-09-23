@@ -133,7 +133,10 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="blackMetal.bmp" />
+    <Image Include="greenMetal.bmp" />
+    <Image Include="lightblueMetal.bmp" />
     <Image Include="metal.bmp" />
+    <Image Include="redMetal.bmp" />
     <Image Include="water.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -444,7 +444,8 @@ void projection() {
 	gluPerspective(20, 1.0, -1, 1);
 	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
 	}
-
+	
+	glTranslatef(tx, 0, tz);
 }
 
 //--------------------------------------TEXTURE--------------------------------------------------
@@ -729,9 +730,10 @@ void drawWaist() {
 }
 
 void drawBody(GLuint* bodytextureArr) {
-	bodytextureArr[0] = loadTexture("blackMetal.bmp");
+	///0---------------------------------------------------bEHIND------------------------------------------
+	bodytextureArr[0] = loadTexture("lightblueMetal.bmp");
 	glColor3f(1, 1, 1);
-	//------------------------------------middle bottom Behind
+	//------------------------------------middle bottom UP 1
 	glPushMatrix();		
 	glTranslatef(0, -1.5, -7);
 	glBegin(GL_QUADS);
@@ -744,7 +746,7 @@ void drawBody(GLuint* bodytextureArr) {
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(1.9, -0.2, 2.8);
 
-	//left view (FROM BEHIND)
+									//left view (FROM BEHIND)
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(1.9, -0.2, 2.8);
 	glTexCoord2f(0.0f, 1.0f);
@@ -794,49 +796,231 @@ void drawBody(GLuint* bodytextureArr) {
 	glEnd();
 	glPopMatrix();
 
-	//------------------------------middle bottom up 1
+	//------------------------------middle bottom up 2
 	glPushMatrix();
 	glColor3f(1, 1, 1);
 	glTranslatef(-0.4, -1.69, -6.2);
 	drawRectangle(2.3, 1, 2);
 	glPopMatrix();
+
+
+	//------------------------------------middle bottom UP 3
+	glPushMatrix();
+	glTranslatef(0, -1.49, -9);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-0.4, -0.2, 2.8);		//front view (FROM behind)
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.9, -0.2, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2., -0.3,-1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.5, -0.3, -1);
+
+	glTexCoord2f(0.0f, 0.0f);			//right view
+	glVertex3f(-0.5, -0.3, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.5, 1, -1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.4, 1, 2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.4, -0.2, 2.8);
+
+	glTexCoord2f(0.0f, 0.0f);			//Bottom View
+	glVertex3f(-0.4, -0.2, 2.8);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.4, 1, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.9, 1, 2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.9, -0.2, 2.8);
+
+	glTexCoord2f(0.0f, 0.0f);			//left
+	glVertex3f(1.9, -0.2, 2.8);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.9, 1, 2.8);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2., 1, -1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2., -0.3, -1);
+
+	glTexCoord2f(0.0f, 0.0f);			//	ABOVE
+	glVertex3f(2., -0.3, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.5, -0.3, -1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.5, 1, -1);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2.,1, -1);
+
+	glTexCoord2f(0.0f, 0.0f);			//BEHIND(FROM BEHIND)
+	glVertex3f(2., 1, -1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-0.5, 1, -1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-0.5, 1, 2.8);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2., 1, 2.8);
+	glEnd();
+	glPopMatrix();
 	glDeleteTextures(1, &bodytextureArr[0]);
 
-
-
-
 	//--------------------------------------FRONT ------------------------------------------------
+	bodytextureArr[1] = loadTexture("blackMetal.bmp");
 	//LEFT SIDE
 	glPushMatrix();
 	glRotatef(180, 1, 0, 0);		//back
 	glBegin(GL_QUADS);
-	glVertex3f(0, 1.5, 2.6);		
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(0, 1.5, 2.6);	
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-2, 1.6, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.8, 1.6, 10);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0, 1.5, 10);
 
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, 1.5, 10);			//above
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0, -0.2, 10);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.8, -0.2, 10);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-1.8, 1.6, 10);
 
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.8, 1.6, 10);		//left	(outside)
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-1.8, 1.6, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-2, -0.2, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-1.8, -0.2, 10);
 
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.8, -0.2, 10);		//front
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-2, -0.2, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0, -0.2, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0, -0.2, 10);
 	
-	glColor3f(0, 0, 0);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, -0.2, 10);		//right (inside)
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0, -0.2, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0, 1.5, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0, 1.5, 10);
 	glEnd();
 	glPopMatrix();
+
+	//rIGHT SIDE
+	glPushMatrix();
+	glRotatef(180, 1, 0, 0);		//back
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.5, 1.5, 2.6);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.5, 1.6, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.3, 1.6, 10);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.5, 1.5, 10);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.5, 1.5, 10);			//above
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.5, -0.2, 10);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.3, -0.2, 10);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.3, 1.6, 10);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(3.3, 1.6, 10);		//left	(outside)
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.3, 1.6, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.5, -0.2, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.3, -0.2, 10);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(3.3, -0.2, 10);		//front
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.5, -0.2, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.5, -0.2, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.5, -0.2, 10);
+
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(1.5, -0.2, 10);		//right (inside)
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(1.5, -0.2, 2.6);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.5, 1.5, 2.6);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.5, 1.5, 10);
+	glEnd();
+	glPopMatrix();
+	glDeleteTextures(1, &bodytextureArr[1]);
+
+	bodytextureArr[2] = loadTexture("lightblueMetal.bmp");
+	glPushMatrix();							//MUSCLE Middle 1
+	glTranslatef(-0.75, 0.35, -5);
+	drawRectangle(3, 0.1, 2);
+	glPopMatrix();
+
+	glColor3f(1, 1, 1);
+	glPushMatrix();							//MUSCLE Middle 2
+	glTranslatef(-0.75, 0.35, -7.1);
+	drawRectangle(3, 0.1, 2);
+	glPopMatrix();
+
+	glColor3f(1, 1, 1);
+	glPushMatrix();							//MUSCLE Middle 3
+	glTranslatef(-0.75, 0.35, -10);
+	drawRectangle(3, 0.1, 2.8);
+	glPopMatrix();
+
+
+	glColor3f(1, 0, 0);
+	glPushMatrix();							//MUSCLE Left 1
+	glTranslatef(-1.7, 0.2, -10);
+	glRotatef(10, 0, 0, 1);
+	drawRectangle(1, 0.1, 7);
+	glPopMatrix();
+
+	glColor3f(1, 0, 0);
+	glPushMatrix();							//MUSCLE Left 1
+	glTranslatef(2.2, 0.36, -10);
+	glRotatef(-10, 0, 0, 1);
+	drawRectangle(1, 0.1, 7);
+	glPopMatrix();
+
+	glDeleteTextures(1, &bodytextureArr[2]);
+
+	bodytextureArr[3] = loadTexture("blackMetal.bmp");
+	glColor3f(1, 1, 1);
+	glPushMatrix();							//MUSCLE Line 1
+	glTranslatef(-0.75, 0.35, -5.1);
+	drawRectangle(3, 0.1, 0.1);
+	glPopMatrix();
+
+	glColor3f(1, 1, 1);
+	glPushMatrix();							//MUSCLE Line 2
+	glTranslatef(-0.75, 0.35, -7.2);
+	drawRectangle(3, 0.1, 0.1);
+	glPopMatrix();
+
+
+	glDeleteTextures(1, &bodytextureArr[3]);
+
 
 }
 

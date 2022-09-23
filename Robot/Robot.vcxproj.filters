@@ -29,5 +29,14 @@
     <Image Include="blackMetal.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="greenMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="redMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="lightblueMetal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
