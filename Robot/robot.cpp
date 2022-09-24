@@ -1581,7 +1581,7 @@ void drawBack() {
 
 
 	//-----------------------------------------------------Left Wing --------------------------------------------------
-	backtextureArr[1] = loadTexture("whiteblueMark.bmp");
+	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.4, -3, -15);				//inside (FROM behind)
@@ -1753,7 +1753,7 @@ void drawBack() {
 
 
 	//-----------------------------------------------------Right Wing --------------------------------------------------
-	backtextureArr[1] = loadTexture("whiteblueMark.bmp");
+	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(2.9, -3, -15);				//inside (FROM behind)
