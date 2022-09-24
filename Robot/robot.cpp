@@ -1924,7 +1924,7 @@ void drawBack() {
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[2]);
 	//-------------------------------------------------Right side jetpack---------------------------------
-	backtextureArr[1] = loadTexture("lightblue.bmp");
+	backtextureArr[1] = loadTexture("whiteblueMark.bmp");
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
 	glVertex3f(3, -3.7, -15);
@@ -1951,7 +1951,7 @@ void drawBack() {
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(3, -3.9, -21);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(3, -3.2, -21);
+	glVertex3f(3, -2.9, -19);
 
 	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
 	glVertex3f(6, -3.2, -15);
@@ -2008,7 +2008,7 @@ void drawBack() {
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.5, -3.9, -21);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(-1.5, -3.2, -21);
+	glVertex3f(-1.5, -2.9, -19);
 
 	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
 	glVertex3f(-4.5, -3.2, -15);
@@ -2132,6 +2132,12 @@ void drawBack() {
 
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[1]);
+
+	//-------------------------jetpack middle-----------------------------------------------------
+	glPushMatrix();
+	glTranslatef(-0.2, -5, -20);
+	DrawSphere(0.4);
+	glPopMatrix();
 }
 
 void display() {
