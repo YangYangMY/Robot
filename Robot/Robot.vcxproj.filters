@@ -41,13 +41,7 @@
     <Image Include="darkblueMetal.bmp">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="blueMetal.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="lightblue.bmp">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="blueGradient.bmp">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="whiteblueMark.bmp">

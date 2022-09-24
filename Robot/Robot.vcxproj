@@ -133,8 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="blackMetal.bmp" />
-    <Image Include="blueGradient.bmp" />
-    <Image Include="blueMetal.bmp" />
     <Image Include="darkblueMetal.bmp" />
     <Image Include="greenMetal.bmp" />
     <Image Include="lightblue.bmp" />
