@@ -1515,8 +1515,8 @@ void drawChest() {
 
 }
 
-void drawBack() {
-	GLuint backtextureArr[5];		//initialize texture
+void drawBack(GLuint* backtextureArr) {
+
 }
 
 void display() {
@@ -1527,8 +1527,15 @@ void display() {
 
 	glMatrixMode(GL_MODELVIEW);		//refer to modelview Matrix
 
+
+
+
+
 	glLoadIdentity();		//reset to modelview matrix
 	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
+
+
+
 
 	//--------------------START OF DESIGN-----------------------------------------------------
 
