@@ -1519,23 +1519,23 @@ void drawBack() {
 
 	//-----------------------------------------------------MIDDLE PART --------------------------------------------------
 	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
-	glVertex3f(-0.7, -3.1, -9.5);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(2.2, -3.1, -9.5);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(3.6, -3, -20.5);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(-2.1, -3, -20.5);
+	//glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
+	//glVertex3f(-0.7, -3.1, -9.5);
+	//glTexCoord2f(0.0f, 1.0f);
+	//glVertex3f(2.2, -3.1, -9.5);
+	//glTexCoord2f(1.0f, 0.0f);
+	//glVertex3f(3.6, -3, -20.5);
+	//glTexCoord2f(1.0f, 1.0f);
+	//glVertex3f(-2.1, -3, -20.5);
 	
 	glTexCoord2f(0.0f, 0.0f);			//front above (FROM BEHIND)
 	glVertex3f(0, -4, -18);
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(1.5, -4, -18);
 	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(3.6, -3, -20.5);
+	glVertex3f(3, -3, -20.5);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(-2.1, -3, -20.5);
+	glVertex3f(-1.5, -3, -20.5);
 
 	glTexCoord2f(0.0f, 0.0f);			//front middle (FROM BEHIND)
 	glVertex3f(0, -4, -18);
@@ -1554,7 +1554,7 @@ void drawBack() {
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.4, -3, -15);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(-2.1, -3, -20.5);
+	glVertex3f(-1.5, -3, -20.5);
 
 	glTexCoord2f(0.0f, 0.0f);			//left middle (FROM BEHIND)
 	glVertex3f(1.5, -4, -18);
@@ -1563,7 +1563,7 @@ void drawBack() {
 	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(2.9, -3, -15);
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(3.6, -3, -20.5);
+	glVertex3f(3, -3, -20.5);
 
 	glTexCoord2f(0.0f, 0.0f);			//under middle (FROM BEHIND)
 	glVertex3f(1.5, -4, -12);
@@ -1923,6 +1923,215 @@ void drawBack() {
 
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[2]);
+	//-------------------------------------------------Right side jetpack---------------------------------
+	backtextureArr[1] = loadTexture("lightblue.bmp");
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(3, -3.7, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(6, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(6, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -3.9, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//Behind (FROM BEHIND)
+	glVertex3f(3, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(5, -3.2, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(6, -3.2, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//Right (FROM BEHIND)
+	glVertex3f(3, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
+	glVertex3f(6, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(6, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(6, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(6, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//under (FROM BEHIND)
+	glVertex3f(3, -3.7, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3, -3.2, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(6, -3.2, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(6, -3.7, -15);
+
+	glTexCoord2f(0.0f, 0.0f);			//above (FROM BEHIND)
+	glVertex3f(6, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(6, -3.2, -21);;
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3, -3.2, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -3.9, -21);
+
+	//-------------------------------------------------left side jetpack---------------------------------
+
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(-1.5, -3.7, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-4.5, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-4.5, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -3.9, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//Behind (FROM BEHIND)
+	glVertex3f(-1.5, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-3.5, -3.2, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-4.5, -3.2, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//Right (FROM BEHIND)
+	glVertex3f(-1.5, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.5, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.5, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
+	glVertex3f(-4.5, -3.2, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-4.5, -3.7, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-4.5, -3.9, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-4.5, -3.2, -21);
+
+	glTexCoord2f(0.0f, 0.0f);			//under (FROM BEHIND)
+	glVertex3f(-1.5, -3.7, -15);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.5, -3.2, -15);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-4.5, -3.2, -15);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-4.5, -3.7, -15);
+
+	glTexCoord2f(0.0f, 0.0f);			//above (FROM BEHIND)
+	glVertex3f(-4.5, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-4.5, -3.2, -21);;
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.5, -3.2, -21);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -3.9, -21);
+
+	//-----------------------------------------JETPACK TOP Right----------------------------------------------------
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(6, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3, -3.9, -21);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3, -3.5, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(5.2, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
+	glVertex3f(6, -2.9, -19);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(5.2, -2.9, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//right (FROM BEHIND)
+	glVertex3f(3, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
+	glVertex3f(6, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(6, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(5.2, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(5.2, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//Above (FROM BEHIND)
+	glVertex3f(3, -3.5, -32);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(5.2, -3.5, -32);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(5.2, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3, -2.9, -32);
+
+
+	//-----------------------------------------JETPACK TOP left----------------------------------------------------
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(-4.5, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.5, -3.9, -21);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.5, -3.5, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-3.7, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
+	glVertex3f(-4.5, -2.9, -19);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.5, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.5, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-3.7, -2.9, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//right (FROM BEHIND)
+	glVertex3f(-1.5, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.5, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.5, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//left (FROM BEHIND)
+	glVertex3f(-4.5, -3.9, -21);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-4.5, -2.9, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-3.7, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-3.7, -3.5, -32);
+
+	glTexCoord2f(0.0f, 0.0f);			//Above (FROM BEHIND)
+	glVertex3f(-1.5, -3.5, -32);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-3.7, -3.5, -32);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-3.7, -2.9, -32);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1.5, -2.9, -32);
+
+	glEnd();
+	glDeleteTextures(1, &backtextureArr[1]);
 }
 
 void display() {
