@@ -59,5 +59,8 @@
     <Image Include="sun.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="robotEye.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
