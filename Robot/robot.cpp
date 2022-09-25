@@ -3939,7 +3939,7 @@ void display() {
 
 	//Draw shoulder left
 	glPushMatrix();
-	glTranslatef(-0.5, -17, 0);
+	glTranslatef(-0.5, -17, 2);
 	glPushMatrix();
 	glRotatef(down, 1, 0, 0);
 	shoulderLeft();
@@ -3976,7 +3976,7 @@ void display() {
 
 	//draw shoulder right
 	glPushMatrix();
-	glTranslatef(-2.4, -17, 0);
+	glTranslatef(-2.4, -17, 2);
 	glPushMatrix();
 	glRotatef(up, 1, 0, 0);
 	shoulderRight();
@@ -4006,7 +4006,7 @@ void display() {
 
 	//draw thigh left
 	glPushMatrix();
-	glTranslatef(-2, -16, 0);
+	glTranslatef(-2, -16, 2);
 	glPushMatrix();
 	glRotatef(le, 1, 0, 0);
 	thighLeft();
@@ -4022,7 +4022,7 @@ void display() {
 
 	//draw thigh right
 	glPushMatrix();
-	glTranslatef(-2, -16, 0);
+	glTranslatef(-2, -16, 2);
 	glPushMatrix();
 	glRotatef(ri, 1, 0, 0);
 	thighRight();
