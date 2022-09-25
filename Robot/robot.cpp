@@ -2587,9 +2587,6 @@ void display() {
 
 	//draw arm left
 	glPushMatrix();
-	glRotatef(up, 1, 0, 0);
-	glPushMatrix();
-	glRotatef(down, 1, 0, 0);
 	glScalef(2.5, 5, 1.4);
 	glTranslatef(-4, 1.4, -1.1);
 	drawArmLeft(1.0);
@@ -2599,8 +2596,12 @@ void display() {
 
 	//draw forearm left
 	glPushMatrix();
+	glRotatef(up, -1, 0, 0);
+	glPushMatrix();
+	glRotatef(down, -1, 0, 0);
 	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(-3.95, 0.6,-1.1);
+	glTranslatef(-3, 1.4,-1.1);
+	glRotatef(180, 0, 0, 1);
 	drawForeArmLeft1(0.9);
 	glPopMatrix();
 
