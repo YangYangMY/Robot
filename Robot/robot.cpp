@@ -1568,16 +1568,63 @@ void drawChest() {
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.7, 1, -13);
 
+	//------------------above middle
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2.5, 1.1, -17);
+
+	glTexCoord2f(1.0f, 1.0f);				//right above
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(4, 1, -15);
+
+	glTexCoord2f(1.0f, 1.0f);				//left above
+	glVertex3f(-1.1, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-2.5, 1, -15);
+
 	glEnd();
 	glDeleteTextures(1, &chesttextureArr[2]);
 
 	//Draw black line INFRONT crystal
 	chesttextureArr[2] = loadTexture("blackMetal.bmp");
-	glTranslatef(-1.2, 2, -14);
+	glPushMatrix();					//middle line
+	glTranslatef(-1, 1, -13.2);
 	drawRectangle(3.5, 0.5, 0.3);
+	glPopMatrix();
 
+	glPushMatrix();					//right line
+	glTranslatef(2.25, 1.1, -13.2);
+	glRotatef(-35,0,0,1);
+	drawRectangle(2, 0.5, 0.3);
+	glPopMatrix();
 
+	glPushMatrix();					//left line
+	glTranslatef(-2.4, 0, -13.2);
+	glRotatef(35, 0, 0, 1);
+	drawRectangle(2, 0.5, 0.3);
+	glPopMatrix();
 	glDeleteTextures(1, &chesttextureArr[0]);
+
+	//----------------------------------------------------------CHEST TWO FRONT CIRCLE-------------------------------------
+	//LEFT SIDE
+	glPushMatrix();
+	glTranslatef(0, 4, 0);
+	DrawCylinder(0, 2, 4);
+	glPopMatrix();
 }
 
 void drawBack() {
