@@ -252,6 +252,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		//RESET GUN
 		gunspeed = 0;
 		bulletpos1 = -4;
+		//RESET ROCKET
+		gunspeed = 0;
+		bulletpos1 = -4;
+
 		}
 		else if (wParam == 'R') {
 			headTurnRight = true;
