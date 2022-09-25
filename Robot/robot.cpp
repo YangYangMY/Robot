@@ -17,6 +17,11 @@ float PNear = 8.0, PFar = 30.0;		//Perspective Near and Far
 float ptx = 0, pty = 0, ptz = 0, ptSpeed = 0.1;   //traslate for projection
 float pry = 0, pxy = 0, pzy = 0, prSpeed = 2;		//rotate whole object
 
+//Fanspeeed (CHEST)
+float fanspeed = 5, fanrotate = 0;
+
+//SmokeSpeed (JETPACK)
+float smokespeed = 0, smokedrop = -16;
 //For texture
 GLuint texture = 0;			//texture name
 BITMAP BMP;					//bitmap structure
@@ -86,6 +91,20 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, tz = 10;
+		else if (wParam == '1')
+			fanspeed += 10;
+		else if (wParam == '2')
+			fanspeed -= 10;
+		else if (wParam == '3')
+		{
+			if (smokespeed >= 0.2)
+			{
+				smokespeed = 0, smokedrop = -16;
+			}
+			else {
+				smokespeed = 0.2;
+			}
+		}
 		break;
 
 	default:
@@ -1512,9 +1531,177 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[0]);
 
 	//Draw RED CRYSTAL INFRONT body
-	chesttextureArr[2] = loadTexture("redCrystal.bmp");
+	chesttextureArr[2] = loadTexture("red.bmp");
+	glBegin(GL_QUADS);				//front
+	glTexCoord2f(0.0f, 0.0f);				//middle bottom
+	glVertex3f(-0.1, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 1, -9.1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1, 1.5, -13);
 
+	glTexCoord2f(0.0f, 0.0f);				//right bottom
+	glVertex3f(1.6, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.2, 1, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.6, 1, -9.1);
+
+	glTexCoord2f(0.0f, 0.0f);				//left bottom
+	glVertex3f(-0.1, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.7, 1, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1, 1, -9.1);
+
+	glTexCoord2f(0.0f, 0.0f);				//middle up
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2.5, 1.1, -17);
+
+	glTexCoord2f(1.0f, 1.0f);				//right up
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(3.2, 1, -13);
+
+	glTexCoord2f(1.0f, 1.0f);				//left up
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-1.7, 1, -13);
+
+	//------------------above middle
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2.5, 1.1, -17);
+
+	glTexCoord2f(1.0f, 1.0f);				//right above
+	glVertex3f(2.5, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(4, 1, -15);
+
+	glTexCoord2f(1.0f, 1.0f);				//left above
+	glVertex3f(-1.1, 1, -17);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-2.5, 1, -15);
+
+	glEnd();
 	glDeleteTextures(1, &chesttextureArr[2]);
+
+	//Draw black line INFRONT crystal
+	chesttextureArr[2] = loadTexture("blackMetal.bmp");
+	glPushMatrix();					//middle line
+	glTranslatef(-1, 1, -13.2);
+	drawRectangle(3.5, 0.5, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();					//right line
+	glTranslatef(2.25, 1.1, -13.2);
+	glRotatef(-35,0,0,1);
+	drawRectangle(2, 0.5, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();					//left line
+	glTranslatef(-2.4, 0, -13.2);
+	glRotatef(35, 0, 0, 1);
+	drawRectangle(2, 0.5, 0.3);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[2]);
+
+	//----------------------------------------------------------CHEST TWO FRONT CIRCLE-------------------------------------
+	//Right SIDE
+	chesttextureArr[3] = loadTexture("blackMetal.bmp");
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(6, 12.5, 0.1);
+	DrawCylinder(0, 1.2, 1);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	glPushMatrix();
+	glTranslatef(6, 0.9, -12.5);
+	DrawSphere(0.35);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	glPushMatrix();
+	glTranslatef(6, 1, -12.6);			//right
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();						//left 
+	glTranslatef(6, 1, -12.6);
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(-0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	//LEFT SIDE
+	chesttextureArr[3] = loadTexture("blackMetal.bmp");
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(-4.5, 12.5, 0.1);
+	DrawCylinder(0, 1.2, 1);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	glPushMatrix();
+	glTranslatef(-4.5, 0.9, -12.5);
+	DrawSphere(0.35);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	glPushMatrix();
+	glTranslatef(-4.5, 1, -12.6);			//right
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();						//left 
+	glTranslatef(-4.5, 1, -12.6);
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(-0.9, 0.1, 0.3);
+	glPopMatrix();
+	fanrotate -= fanspeed;
+	glDeleteTextures(1, &chesttextureArr[3]);
 }
 
 void drawBack() {
@@ -1523,14 +1710,6 @@ void drawBack() {
 
 	//-----------------------------------------------------MIDDLE PART --------------------------------------------------
 	glBegin(GL_QUADS);
-	//glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
-	//glVertex3f(-0.7, -3.1, -9.5);
-	//glTexCoord2f(0.0f, 1.0f);
-	//glVertex3f(2.2, -3.1, -9.5);
-	//glTexCoord2f(1.0f, 0.0f);
-	//glVertex3f(3.6, -3, -20.5);
-	//glTexCoord2f(1.0f, 1.0f);
-	//glVertex3f(-2.1, -3, -20.5);
 	
 	glTexCoord2f(0.0f, 0.0f);			//front above (FROM BEHIND)
 	glVertex3f(0, -4, -18);
@@ -2138,7 +2317,7 @@ void drawBack() {
 	glDeleteTextures(1, &backtextureArr[1]);
 
 	//------------------------------jetpack middle
-	backtextureArr[3] = loadTexture("redCrystal.bmp");
+	backtextureArr[3] = loadTexture("red.bmp");
 	glPushMatrix();
 	glTranslatef(0.8,-3.2, -19);
 	DrawSphere(0.5);
@@ -2259,6 +2438,48 @@ void drawBack() {
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(4.9, -2.85, -31.5);
 	glEnd();
+	glDeleteTextures(1, &backtextureArr[5]);
+
+	//------------------------------------------------------------ANIMATION-----------------------------------------------
+	// Smoke Hole
+	backtextureArr[6] = loadTexture("blackMetal.bmp");
+
+	glPushMatrix();						//left side
+	glTranslatef(-3, -3, -15);
+	DrawCylinder(0.8, 0.8, 0.8);
+	glPopMatrix();
+
+	glPushMatrix();						//right side
+	glTranslatef(4.5, -3, -15);
+	DrawCylinder(0.8, 0.8, 0.8);
+	glPopMatrix();
+
+	glDeleteTextures(1, &backtextureArr[6]);
+
+
+	//RELOAD SMOKE BULLET
+	backtextureArr[5] = loadTexture("smoke.bmp");
+	//left side
+	glPushMatrix();							//smoke 1
+	glTranslatef(-3, -3, smokedrop);
+	DrawCylinder(0.6, 0.6, 0.8);
+	glPopMatrix();
+
+	if (smokedrop >= -12) {
+		smokedrop = -16;
+	}
+
+	//right side
+	glPushMatrix();							//smoke 1
+	glTranslatef(4.5, -3, smokedrop);
+	DrawCylinder(0.6, 0.6, 0.8);
+	glPopMatrix();
+
+
+	if (smokedrop >= -12) {
+		smokedrop = -16;
+	}
+	smokedrop += smokespeed;
 	glDeleteTextures(1, &backtextureArr[5]);
 }
 
