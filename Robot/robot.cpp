@@ -11,6 +11,7 @@
 int qNo = 1;
 
 float up = 0, down = 0, tspeedd = 1;
+float le = 0, ri = 0;
 float tz = 0, tspeed = 1.0, tx = 0, ty = 0;
 bool isOrtho = true;				// Is orthorgraphic View?
 float ONear = -5.0, OFar = 10.0; //Ortho near and Far
@@ -95,6 +96,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			down += tspeedd;
 		else if (wParam == 'F')
 			down -= tspeedd;
+		else if (wParam == 'Z')
+			le += tspeedd;
+		else if (wParam == 'X')
+			le -= tspeedd;
+		else if (wParam == 0x39)
+			ri += tspeedd;
+		else if (wParam == 0x30)
+			ri -= tspeedd;
 		break;
 
 	default:
@@ -2531,85 +2540,36 @@ void drawFingers(float l, float w, float h) {
 	glEnd();
 	glDeleteTextures(1, &fingertextureArr[0]);
 }
-
-void display() {
-	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  //clear screen
-	glEnable(GL_DEPTH_TEST);
-	projection();
-
-	glMatrixMode(GL_MODELVIEW);		//refer to modelview Matrix
-
-	glLoadIdentity();		//reset to modelview matrix
-	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
-
-	//--------------------START OF DESIGN-----------------------------------------------------
-
-
+void shoulderLeft() {
 	glPushMatrix();
-	//Draw Waist
-	glRotatef(90, 1.0, 0.0, 0.0);
-	glPushMatrix();
-	glScalef(1.4, 1.4, 1.4);
-	drawWaist();
-	glPopMatrix();
-	//Draw Body
-	glPushMatrix();
-	glRotatef(-4, 1, 0, 0);
-	glTranslatef(0,0.2,0);
-	glScalef(1.3, 1.1, 1.3);
-	drawBody();
-	glPopMatrix();
-
-
-
-	glPushMatrix();
-	glTranslatef(0.1, -0.5, -1.3);
-	//Draw Chest
-	drawChest();
-	glPopMatrix();
-
-	glPushMatrix();
-	//Draw Back
-	glTranslatef(0, 0, -0.8);
-	drawBack();
-	glPopMatrix();
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(1, 1, 1);
-	//Draw shoulder left
-	glPushMatrix();
-	glTranslatef(-8.8,14, -0.6);
+	glTranslatef(-8.8, 14, -0.6);
 	drawShoulderSphere(2.5);
 	glPopMatrix();
-	
-	//draw shoulder right
+}
+
+void shoulderRight() {
 	glPushMatrix();
 	glTranslatef(10.5, 14, -0.6);
 	drawShoulderSphere(2.5);
 	glPopMatrix();
+}
 
-	//draw arm left
+void upperArmLeft() {
 	glPushMatrix();
 	glScalef(2.5, 5, 1.4);
 	glTranslatef(-4, 1.4, -1.1);
 	drawArmLeft(1.0);
 	glPopMatrix();
 	glPopMatrix();
+}
 
-
-	//draw forearm left
+void lowerArmLeft() {
 	glPushMatrix();
-	glRotatef(up, -1, 0, 0);
 	glPushMatrix();
-	
-	
 	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(-3, 1.6,-0.2);
+	glTranslatef(-3, 1.5, -0.2);
 	glRotatef(-180, 0, 0, 1);
 	glRotatef(90, 0, 1, 0);
-	glRotatef(down, 0, 0, 1);
 	drawForeArmLeft1(0.9);
 	glPopMatrix();
 	glPopMatrix();
@@ -2618,44 +2578,18 @@ void display() {
 	drawShoulderSphere(1.8);
 	glPopMatrix();
 	glPopMatrix();
-	//draw arm right
-	glPushMatrix();
-	glScalef(2.5, 5, 1.4);
-	glTranslatef(3.7, 1.4, -1.1);
-	drawArmLeft(1.0);
-	glPopMatrix();
+}
 
-
-
-
-	//draw forearm right
-	glPushMatrix();
-	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(3.75, 0.6, -1.1);
-	drawForeArmLeft1(0.9);
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslatef(10.4, 1.5, -1.0);
-	drawShoulderSphere(1.8);
-	glPopMatrix();
-
-	// draw wrist left 
-	glPushMatrix();
-	glScalef(2.5, 2.9, 1.4);
-	glRotatef(180, 1, 0,0);
-	glTranslatef(-2.4, 0.1, 0.3);
-	drawtrapezoid();
-	glPopMatrix();
-
-	//draw wrist right
+void wristLeft() {
 	glPushMatrix();
 	glScalef(2.5, 2.9, 1.4);
 	glRotatef(180, 1, 0, 0);
-	glTranslatef(5.2, 0.1, 0.3);
+	glTranslatef(-2.4, 0.1, 0.3);
 	drawtrapezoid();
 	glPopMatrix();
-	
+}
+
+void fingersLeft() {
 	//draw fingers left 1
 	glPushMatrix();
 	glColor3f(0, 0, 1);
@@ -2677,7 +2611,7 @@ void display() {
 	glPushMatrix();
 	glColor3f(0, 0, 1);
 	glTranslatef(-9.8, -4.7, -1.5);
-	drawFingers(1, 2,0.3);
+	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
@@ -2706,7 +2640,39 @@ void display() {
 	glTranslatef(-8.0, -6.2, -1.0);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
+}
 
+void upperArmRight() {
+	glPushMatrix();
+	glScalef(2.5, 5, 1.4);
+	glTranslatef(3.7, 1.4, -1.1);
+	drawArmLeft(1.0);
+	glPopMatrix();
+}
+
+void lowerArmRight() {
+	glPushMatrix();
+	glScalef(2.5, 5.3, 1.4);
+	glTranslatef(3.75, 0.6, -1.1);
+	drawForeArmLeft1(0.9);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(10.4, 1.5, -1.0);
+	drawShoulderSphere(1.8);
+	glPopMatrix();
+}
+
+void wristRight() {
+	glPushMatrix();
+	glScalef(2.5, 2.9, 1.4);
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(5.2, 0.1, 0.3);
+	drawtrapezoid();
+	glPopMatrix();
+}
+
+void fingersRight() {
 	//draw fingers right 1
 	glPushMatrix();
 	glColor3f(0, 0, 1);
@@ -2758,8 +2724,9 @@ void display() {
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 	glPopMatrix();
+}
 
-	//draw thigh left
+void thighLeft() {
 	glPushMatrix();
 	glTranslatef(-1.9, -1.7, -1.0);
 	drawShoulderSphere(2);
@@ -2793,8 +2760,9 @@ void display() {
 	glTranslatef(-2.6, 1.2, -1.95);
 	drawtrapezoid();
 	glPopMatrix();
+}
 
-	//draw thigh right
+void thighRight() {
 	glPushMatrix();
 	glTranslatef(4.5, -1.7, -1.0);
 	drawShoulderSphere(2);
@@ -2828,25 +2796,154 @@ void display() {
 	glTranslatef(2.5, 0.6, -1.95);
 	drawtrapezoid();
 	glPopMatrix();
+}
 
-	// draw feet left
-
+void feetLeft() {
 	glPushMatrix();
 	glScalef(5, 3, 1);
 	glRotatef(90, 0, 1, 0);
 	glTranslatef(2, -7, -0.85);
 	drawtrapezoid();
 	glPopMatrix();
+}
 
-	// draw feet right
-
+void feetRight() {
 	glPushMatrix();
 	glScalef(5, 3, 1);
 	glRotatef(90, 0, 1, 0);
 	glTranslatef(2, -7, 0.45);
 	drawtrapezoid();
 	glPopMatrix();
+}
+void display() {
+	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  //clear screen
+	glEnable(GL_DEPTH_TEST);
+	projection();
 
+	glMatrixMode(GL_MODELVIEW);		//refer to modelview Matrix
+
+	glLoadIdentity();		//reset to modelview matrix
+	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
+
+	//--------------------START OF DESIGN-----------------------------------------------------
+
+
+	glPushMatrix();
+	//Draw Waist
+	glRotatef(90, 1.0, 0.0, 0.0);
+	glPushMatrix();
+	glScalef(1.4, 1.4, 1.4);
+	drawWaist();
+	glPopMatrix();
+	//Draw Body
+	glPushMatrix();
+	glRotatef(-4, 1, 0, 0);
+	glTranslatef(0,0.2,0);
+	glScalef(1.3, 1.1, 1.3);
+	drawBody();
+	glPopMatrix();
+
+
+
+	glPushMatrix();
+	glTranslatef(0.1, -0.5, -1.3);
+	//Draw Chest
+	drawChest();
+	glPopMatrix();
+
+	glPushMatrix();
+	//Draw Back
+	glTranslatef(0, 0, -0.8);
+	drawBack();
+	glPopMatrix();
+	glPopMatrix();
+
+	//Draw shoulder left
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
+	shoulderLeft();
+	
+
+
+	//draw arm left
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
+	upperArmLeft();
+
+
+	//draw forearm left
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
+	lowerArmLeft();
+	
+	// draw wrist left
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
+	wristLeft();
+
+	//draw fingers
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
+	fingersLeft();
+
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+	//draw shoulder right
+	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	shoulderRight();
+	//draw arm right
+	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	upperArmRight();
+	//draw forearm right
+	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	lowerArmRight();
+
+	//draw wrist right
+	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	wristRight();
+	
+	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	fingersRight();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+	//draw thigh left
+	glPushMatrix();
+	glRotatef(le, 1, 0, 0);
+	thighLeft();
+
+	//draw thigh right
+	glPushMatrix();
+	glRotatef(ri, 1, 0, 0);
+	thighRight();
+
+	// draw feet left
+	glPushMatrix();
+	glRotatef(le, 0.5, 0, 0);
+	feetLeft();
+
+	// draw feet right
+	glPushMatrix();
+	glRotatef(ri, 0.5, 0, 0);
+	feetRight();
+
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
 
