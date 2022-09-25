@@ -2302,8 +2302,7 @@ void drawForeArmLeft3(float size) {
 
 void drawtrapezoid() {
 
-	glMatrixMode(GL_MODELVIEW); //refer to modelview matrix
-	glLoadIdentity(); //Reset modelview matrix 
+
 	glPushMatrix();
 	glColor3f(1, 0, 0);
 	glBegin(GL_POLYGON);
@@ -2440,7 +2439,7 @@ void display() {
 
 	// draw wrist
 	glPushMatrix();
-	glRotatef(180, 1, 0,0);
+	glRotatef(180, 1, 1,0);
 	drawtrapezoid();
 	glPopMatrix();
 	glPopMatrix();
@@ -2474,7 +2473,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	if (!RegisterClassEx(&wc)) return false;
 
 	HWND hWnd = CreateWindow(WINDOW_TITLE, WINDOW_TITLE, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 900, 700,
+		CW_USEDEFAULT, CW_USEDEFAULT, 700, 700,
 		NULL, NULL, wc.hInstance, NULL);
 
 	//--------------------------------
