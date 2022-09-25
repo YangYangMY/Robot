@@ -20,6 +20,8 @@ float pry = 0, pxy = 0, pzy = 0, prSpeed = 2;		//rotate whole object
 //Fanspeeed (CHEST)
 float fanspeed = 5, fanrotate = 0;
 
+//SmokeSpeed (JETPACK)
+float smokespeed = 0, smokedrop = -16;
 //For texture
 GLuint texture = 0;			//texture name
 BITMAP BMP;					//bitmap structure
@@ -93,6 +95,16 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			fanspeed += 10;
 		else if (wParam == '2')
 			fanspeed -= 10;
+		else if (wParam == '3')
+		{
+			if (smokespeed >= 0.2)
+			{
+				smokespeed = 0, smokedrop = -16;
+			}
+			else {
+				smokespeed = 0.2;
+			}
+		}
 		break;
 
 	default:
@@ -2426,6 +2438,48 @@ void drawBack() {
 	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(4.9, -2.85, -31.5);
 	glEnd();
+	glDeleteTextures(1, &backtextureArr[5]);
+
+	//------------------------------------------------------------ANIMATION-----------------------------------------------
+	// Smoke Hole
+	backtextureArr[6] = loadTexture("blackMetal.bmp");
+
+	glPushMatrix();						//left side
+	glTranslatef(-3, -3, -15);
+	DrawCylinder(0.8, 0.8, 0.8);
+	glPopMatrix();
+
+	glPushMatrix();						//right side
+	glTranslatef(4.5, -3, -15);
+	DrawCylinder(0.8, 0.8, 0.8);
+	glPopMatrix();
+
+	glDeleteTextures(1, &backtextureArr[6]);
+
+
+	//RELOAD SMOKE BULLET
+	backtextureArr[5] = loadTexture("smoke.bmp");
+	//left side
+	glPushMatrix();							//smoke 1
+	glTranslatef(-3, -3, smokedrop);
+	DrawCylinder(0.6, 0.6, 0.8);
+	glPopMatrix();
+
+	if (smokedrop >= -12) {
+		smokedrop = -16;
+	}
+
+	//right side
+	glPushMatrix();							//smoke 1
+	glTranslatef(4.5, -3, smokedrop);
+	DrawCylinder(0.6, 0.6, 0.8);
+	glPopMatrix();
+
+
+	if (smokedrop >= -12) {
+		smokedrop = -16;
+	}
+	smokedrop += smokespeed;
 	glDeleteTextures(1, &backtextureArr[5]);
 }
 
