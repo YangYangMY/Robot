@@ -2330,6 +2330,13 @@ void drawtrapezoid() {
 	glEnd();
 
 	glBegin(GL_QUADS);
+	glVertex3f(0, 0, 1);
+	glVertex3f(0, 0, 0);
+	glVertex3f(-2, 0, 0);
+	glVertex3f(-2, 0, 1);
+	glEnd();
+
+	glBegin(GL_QUADS);
 	glColor3f(0, 0, 1);
 	glVertex3f(-1.5, 1, 0);
 	glVertex3f(-1.5, 1, 1);
@@ -2337,7 +2344,49 @@ void drawtrapezoid() {
 	glVertex3f(-2.0, 0, 0);
 	glEnd();
 
+	glBegin(GL_QUADS);
+	glVertex3f(-1.5, 1, 0);
+	glVertex3f(-1.5, 1, 1);
+	glVertex3f(-0.5, 1, 1);
+	glVertex3f(-0.5, 1, 0);
+	glEnd();
+
 	glPopMatrix();
+}
+
+void drawFingers(float size) {
+	glBegin(GL_QUADS);
+	//face1 bottom face
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(0.0f, 0.0f, size);
+	//face3 front
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, 0.0f, size);
+	//face4 right
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+	//face5 back
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(size, size, 0.0f);
+	//face6 top
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glEnd();
 }
 
 void display() {
@@ -2437,10 +2486,27 @@ void display() {
 	drawShoulderSphere(1.8);
 	glPopMatrix();
 
-	// draw wrist
+	// draw wrist left 
 	glPushMatrix();
-	glRotatef(180, 1, 1,0);
+	glScalef(2.5, 2.9, 1.4);
+	glRotatef(180, 1, 0,0);
+	glTranslatef(-2.4, 0.1, 0.3);
 	drawtrapezoid();
+	glPopMatrix();
+
+	//draw wrist right
+	glPushMatrix();
+	glScalef(2.5, 2.9, 1.4);
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(5.2, 0.1, 0.3);
+	drawtrapezoid();
+	glPopMatrix();
+	
+	//draw fingers left
+	glPushMatrix();
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(-4.5, 0, -1.0);
+	drawFingers(0.45);
 	glPopMatrix();
 	glPopMatrix();
 
