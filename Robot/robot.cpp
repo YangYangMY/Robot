@@ -10,7 +10,7 @@
 
 int qNo = 1;
 
-float up = 0, down = 0, tspeedd = 0.2;
+float up = 0, down = 0, tspeedd = 1;
 float tz = 0, tspeed = 1.0, tx = 0, ty = 0;
 bool isOrtho = true;				// Is orthorgraphic View?
 float ONear = -5.0, OFar = 10.0; //Ortho near and Far
@@ -87,10 +87,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, tz = 10;
+		else if (wParam == 'G')
+			up += tspeedd;
 		else if (wParam == 'V')
 			up -= tspeedd;
 		else if (wParam == 'C')
 			down += tspeedd;
+		else if (wParam == 'F')
+			down -= tspeedd;
 		break;
 
 	default:
@@ -2239,13 +2243,14 @@ void drawForeArmLeft1(float size) {
 	glBegin(GL_QUADS);
 	//face1 bottom face
 	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, size);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(size, 0.0f, size);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(size, 0.0f, 0.0f);
-	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, size);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(size, 0.0f, size);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+
 	//face2 left
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
@@ -2598,13 +2603,16 @@ void display() {
 	glPushMatrix();
 	glRotatef(up, -1, 0, 0);
 	glPushMatrix();
-	glRotatef(down, -1, 0, 0);
+	
+	
 	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(-3, 1.4,-1.1);
-	glRotatef(180, 0, 0, 1);
+	glTranslatef(-3, 1.4,0.4);
+	glRotatef(-180, 0, 0, 1);
+	glRotatef(90, 0, 1, 0);
+	glRotatef(down, 0, 0, 1);
 	drawForeArmLeft1(0.9);
 	glPopMatrix();
-
+	glPopMatrix();
 	glPushMatrix();
 	glTranslatef(-8.7, 1.5, -1.0);
 	drawShoulderSphere(1.8);
