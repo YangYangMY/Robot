@@ -39,12 +39,16 @@ HBITMAP hBMP = NULL;		//bitmap handle
 //Lighting
 float a = 0, b = 20, c = 0;
 float angle = 0;
-float amb[3] = { 1, 0, 0 }; // Ambient Light
+float amb[3] = { 1, 1, 1 }; // Ambient Light
 float posB[3] = { a,b,c };		//position for lighting{6,0,0}
-float dif[3] = { 1.0,0.0,0.0 };			//green color dif light 
-float ambM[3] = { 0.0,0.0,1.0 };		//green color amb material
+float dif[3] = { 1.0,1.0,1.0 };			// color dif light 
+float MBlue[3] = { 0.0,0.0,1.0 };		// blue material
+float MRed[3] = { 1.0,0.0,0.0 };		// red material
+float MYellow[3] = { 1.0, 1.0, 0.0 };	//yellow material
+float MWhite[3] = { 1.0, 1.0, 0.0 };	//white material
 bool isLightOn = false;
 bool isDiffuse = true;
+bool lightcheck = true;
 
 float headAngle = 0;
 boolean headTurnRight, headTurnLeft;
@@ -631,20 +635,34 @@ void lighting() {
 		glDisable(GL_LIGHTING);
 	}
 	if (isDiffuse) {
-		glDisable(GL_LIGHT2);
-		//Light 1: white color diffuse light at pos(0, 20, 0) right
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, ambM);
-		glLightfv(GL_LIGHT1, GL_POSITION, posB);
-		glEnable(GL_LIGHT1);
+		lightcheck = true;
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, MBlue);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, MRed);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, MYellow);
+		glMaterialfv(GL_FRONT, GL_DIFFUSE, MWhite);
 	}
 	else {
-		glDisable(GL_LIGHT1);
-		//Light 2: white color ambient light at pos(0, 20, 0) right
-		glLightfv(GL_LIGHT2, GL_AMBIENT, dif);
-		glLightfv(GL_LIGHT2, GL_POSITION, posB);
-		glEnable(GL_LIGHT2);
+		lightcheck = false;
+		glMaterialfv(GL_FRONT, GL_AMBIENT, MRed);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, MBlue);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, MYellow);
+		glMaterialfv(GL_FRONT, GL_AMBIENT, MWhite);
 	}
 
+	if (lightcheck) {
+		//Light 1: white color diffuse light at pos(0, 20, 0) right
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif);
+		glLightfv(GL_LIGHT1, GL_POSITION, posB);
+		glEnable(GL_LIGHT1);
+		glDisable(GL_LIGHT2);
+	}
+	else {
+		//Light 2: white color ambient light at pos(0, 20, 0) right
+		glLightfv(GL_LIGHT2, GL_AMBIENT, amb);
+		glLightfv(GL_LIGHT2, GL_POSITION, posB);
+		glEnable(GL_LIGHT2);
+		glDisable(GL_LIGHT1);
+	}
 
 
 
@@ -2927,7 +2945,7 @@ void display() {
 	DrawSphere(0.5);
 	glDeleteTextures(1, &textureArr[1]);
 	glPopMatrix();
-	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambM);
+
 	//--------------------START OF DESIGN-----------------------------------------------------
 	
 	textureArr[0] = loadTexture("sky.bmp");
