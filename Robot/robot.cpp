@@ -17,6 +17,9 @@ float PNear = 8.0, PFar = 30.0;		//Perspective Near and Far
 float ptx = 0, pty = 0, ptz = 0, ptSpeed = 0.1;   //traslate for projection
 float pry = 0, pxy = 0, pzy = 0, prSpeed = 2;		//rotate whole object
 
+//Fanspeeed (CHEST)
+float fanspeed = 5, fanrotate = 0;
+
 //For texture
 GLuint texture = 0;			//texture name
 BITMAP BMP;					//bitmap structure
@@ -86,6 +89,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, tz = 10;
+		else if (wParam == '1')
+			fanspeed += 10;
+		else if (wParam == '2')
+			fanspeed -= 10;
 		break;
 
 	default:
@@ -1617,14 +1624,72 @@ void drawChest() {
 	glRotatef(35, 0, 0, 1);
 	drawRectangle(2, 0.5, 0.3);
 	glPopMatrix();
-	glDeleteTextures(1, &chesttextureArr[0]);
+	glDeleteTextures(1, &chesttextureArr[2]);
 
 	//----------------------------------------------------------CHEST TWO FRONT CIRCLE-------------------------------------
-	//LEFT SIDE
+	//Right SIDE
+	chesttextureArr[3] = loadTexture("blackMetal.bmp");
 	glPushMatrix();
-	glTranslatef(0, 4, 0);
-	DrawCylinder(0, 2, 4);
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(6, 12.5, 0.1);
+	DrawCylinder(0, 1.2, 1);
 	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	glPushMatrix();
+	glTranslatef(6, 0.9, -12.5);
+	DrawSphere(0.35);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	glPushMatrix();
+	glTranslatef(6, 1, -12.6);			//right
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();						//left 
+	glTranslatef(6, 1, -12.6);
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(-0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	//LEFT SIDE
+	chesttextureArr[3] = loadTexture("blackMetal.bmp");
+	glPushMatrix();
+	glRotatef(-90, 1, 0, 0);
+	glTranslatef(-4.5, 12.5, 0.1);
+	DrawCylinder(0, 1.2, 1);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	glPushMatrix();
+	glTranslatef(-4.5, 0.9, -12.5);
+	DrawSphere(0.35);
+	glPopMatrix();
+	glDeleteTextures(1, &chesttextureArr[3]);
+
+	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	glPushMatrix();
+	glTranslatef(-4.5, 1, -12.6);			//right
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(0.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();						//left 
+	glTranslatef(-4.5, 1, -12.6);
+	glRotatef(fanrotate, 0, 1, 0);
+	drawRectangle(-0.9, 0.1, 0.3);
+	glPopMatrix();
+	fanrotate -= fanspeed;
+	glDeleteTextures(1, &chesttextureArr[3]);
 }
 
 void drawBack() {
@@ -1633,14 +1698,6 @@ void drawBack() {
 
 	//-----------------------------------------------------MIDDLE PART --------------------------------------------------
 	glBegin(GL_QUADS);
-	//glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
-	//glVertex3f(-0.7, -3.1, -9.5);
-	//glTexCoord2f(0.0f, 1.0f);
-	//glVertex3f(2.2, -3.1, -9.5);
-	//glTexCoord2f(1.0f, 0.0f);
-	//glVertex3f(3.6, -3, -20.5);
-	//glTexCoord2f(1.0f, 1.0f);
-	//glVertex3f(-2.1, -3, -20.5);
 	
 	glTexCoord2f(0.0f, 0.0f);			//front above (FROM BEHIND)
 	glVertex3f(0, -4, -18);
