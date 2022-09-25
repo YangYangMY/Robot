@@ -59,6 +59,9 @@ bool isLightOn = false;
 bool isDiffuse = true;
 bool lightcheck = true;
 
+float headAngle = 0;
+boolean headTurnRight, headTurnLeft;
+
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
@@ -236,6 +239,12 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		//RESET GUN
 		gunspeed = 0;
 		bulletpos1 = -4;
+		}
+		else if (wParam == 'R') {
+			headTurnRight = true;
+		}
+		else if (wParam == 'T') {
+			headTurnLeft == true;
 		}
 		break;
 	default:
@@ -2848,6 +2857,25 @@ void drawHead() {
 	GLuint headtextureArr[20];		//initialize texture
 	
 	
+
+	glPushMatrix();
+	//Animation for head
+	glRotatef(headAngle, 0.0, 1.0, 0.0);
+
+	if (headTurnRight == true) {
+		if (headAngle <= 30 && headAngle != 30) {
+			headAngle += 0.5;
+			headTurnLeft = true;
+		}
+	}
+	else {
+		if (headAngle >= 0 && headAngle != 0) {
+			headAngle -= 0.5;
+		}
+	}
+
+
+
 	glPushMatrix();
 	//Draw head
 	glPushMatrix();						//L part
@@ -3044,6 +3072,7 @@ void drawHead() {
 	glDeleteTextures(1, &headtextureArr[5]);
 	glPopMatrix();
 
+	glPopMatrix();
 
 	glPushMatrix();
 	//Draw Neck
@@ -3054,6 +3083,7 @@ void drawHead() {
 	drawRectangle(0.3, 1.0, 0.4);
 	glPopMatrix();
 	glDeleteTextures(1, &headtextureArr[1]);
+	glPopMatrix();
 	glPopMatrix();
 }
 
