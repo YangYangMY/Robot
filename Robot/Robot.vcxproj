@@ -138,9 +138,12 @@
     <Image Include="lightblue.bmp" />
     <Image Include="lightblueMetal.bmp" />
     <Image Include="metal.bmp" />
+    <Image Include="rainbowGradient.bmp" />
+    <Image Include="redCrystal.bmp" />
     <Image Include="redMetal.bmp" />
     <Image Include="water.bmp" />
     <Image Include="whiteblueMark.bmp" />
+    <Image Include="whitegrey.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
