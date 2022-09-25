@@ -3602,51 +3602,42 @@ void wristLeft() {
 void fingersLeft() {
 	//draw fingers left 1
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(-9.8, -4.7, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(-9.8, -5.2, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(-9.8, -6.4, -0.8);
 	drawFingers(1, 1.2, 0.3);
 	glPopMatrix();
 
 		//draw fingers left 2
 		glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(-9.8, -4.7, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(-9.8, -5.2, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(-9.8, -6.4, -1.5);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 	//draw fingers left 3
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(-8.0, -4.3, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(-8.0, -5.0, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(-8.0, -6.2, -1.0);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
@@ -3685,51 +3676,42 @@ void wristRight() {
 void fingersRight() {
 	//draw fingers right 1
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(10.8, -4.7, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(10.8, -5.2, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(10.8, -6.4, -0.8);
 	drawFingers(1, 1.2, 0.3);
 	glPopMatrix();
 
 	//draw fingers right 2
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(10.8, -4.7, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(10.8, -5.2, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(10.8, -6.4, -1.5);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 	//draw fingers right 3
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(9.0, -4.3, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 1, 1);
 	glTranslatef(9.0, -5.0, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glTranslatef(9.0, -6.2, -1.0);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
