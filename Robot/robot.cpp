@@ -118,18 +118,36 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			up += tspeedd;
 		else if (wParam == 'V')
 			up -= tspeedd;
-		else if (wParam == 0x38)
+		else if (wParam == '5')
 			down += tspeedd;
-		else if (wParam == 'F')
+		else if (wParam == 'T')
 			down -= tspeedd;
-		else if (wParam == 'Z')
+		else if (wParam == 'Y')
 			le += tspeedd;
 		else if (wParam == 'X')
 			le -= tspeedd;
-		else if (wParam == 0x39)
+		else if (wParam == '6')
 			ri += tspeedd;
-		else if (wParam == 0x30)
+		else if (wParam == '7')
 			ri -= tspeedd;
+		else if (wParam == '0')
+		{
+			if (gunspeed >= 0.9) {
+				gunspeed = 0, bulletpos1 = -4;
+			}
+			else {
+				gunspeed = 1.3;
+			}
+		}
+		else if (wParam == '9')
+		{
+			if (FlySpeed >= 0.9) {
+				FlySpeed = 0, Fly = 0, rocketpos1 = 6;
+			}
+			else {
+				FlySpeed = 2;
+			}
+		}
 		else if (wParam == 'C')
 		{
 			if (smokespeed >= 0.2)
@@ -3641,6 +3659,42 @@ void display() {
 	glPopMatrix();
 
 	glPopMatrix();
+
+
+	//draw gun 1
+	glPushMatrix();
+	glTranslatef(2, 6.5, 3);
+	drawGun();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-6.5, 6.5, 3);
+	drawGun();
+	glPopMatrix();
+
+	glPushMatrix();						//rocket 1
+	glTranslatef(-1.4, 1.2, rocketpos1);
+	glRotatef(180, 0, 1, 0);
+	glScalef(0.4, 0.4, 0.4);
+	feidan();
+	glPopMatrix();
+
+	glPushMatrix();						//rocket 2
+	glTranslatef(7.2, 1.2, rocketpos1);
+	glRotatef(180, 0, 1, 0);
+	glScalef(0.4, 0.4, 0.4);
+	feidan();
+	glPopMatrix();
+
+	//control rocket
+	rocketpos1 -= FlySpeed;
+
+
+	if (rocketpos1 <= -40) {
+		rocketpos1 = 6;
+
+	}
+
+
 
 	//Draw shoulder left
 	glPushMatrix();
