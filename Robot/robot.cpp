@@ -2898,10 +2898,10 @@ void display() {
 
 	glPushMatrix();
 	//Draw Head
-	glTranslatef(2.0, 0.0, -23.0);
+	glTranslatef(2.0, 0.3, -20.0);
 	glRotatef(90.0, 1.0, 0.0, 0.0);
 	glRotatef(180.0, 0.0, 0.0, 1.0);
-	glScalef(5.0, 5.0, 5.0);
+	glScalef(5.0, 5.0, 4.0);
 	drawHead();
 	glColor3f(1.0, 1.0, 1.0);
 	glPopMatrix();
