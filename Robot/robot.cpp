@@ -1512,9 +1512,72 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[0]);
 
 	//Draw RED CRYSTAL INFRONT body
-	chesttextureArr[2] = loadTexture("redCrystal.bmp");
+	chesttextureArr[2] = loadTexture("red.bmp");
+	glBegin(GL_QUADS);				//front
+	glTexCoord2f(0.0f, 0.0f);				//middle bottom
+	glVertex3f(-0.1, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(1.6, 1, -9.1);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-1, 1.5, -13);
 
+	glTexCoord2f(0.0f, 0.0f);				//right bottom
+	glVertex3f(1.6, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.2, 1, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(1.6, 1, -9.1);
+
+	glTexCoord2f(0.0f, 0.0f);				//left bottom
+	glVertex3f(-0.1, 1, -9.1);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.7, 1, -13);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-0.1, 1, -9.1);
+
+	glTexCoord2f(0.0f, 0.0f);				//middle up
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(2.5, 1.1, -17);
+
+	glTexCoord2f(1.0f, 1.0f);				//right up
+	glVertex3f(2.5, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(2.5, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(4, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(3.2, 1, -13);
+
+	glTexCoord2f(1.0f, 1.0f);				//left up
+	glVertex3f(-1, 1.5, -13);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.1, 1.1, -17);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2.5, 1, -15);
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-1.7, 1, -13);
+
+	glEnd();
 	glDeleteTextures(1, &chesttextureArr[2]);
+
+	//Draw black line INFRONT crystal
+	chesttextureArr[2] = loadTexture("blackMetal.bmp");
+	glTranslatef(-1.2, 2, -14);
+	drawRectangle(3.5, 0.5, 0.3);
+
+
+	glDeleteTextures(1, &chesttextureArr[0]);
 }
 
 void drawBack() {
@@ -2138,7 +2201,7 @@ void drawBack() {
 	glDeleteTextures(1, &backtextureArr[1]);
 
 	//------------------------------jetpack middle
-	backtextureArr[3] = loadTexture("redCrystal.bmp");
+	backtextureArr[3] = loadTexture("red.bmp");
 	glPushMatrix();
 	glTranslatef(0.8,-3.2, -19);
 	DrawSphere(0.5);
