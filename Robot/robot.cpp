@@ -2552,110 +2552,203 @@ void display() {
 	//draw fingers left 1
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(-6, -3.6, 1.0);
+	glTranslatef(-9.8, -4.7, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(-6, -5.2, 1.0);
+	glTranslatef(-9.8, -5.2, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(-6, -6.4, 1.0);
+	glTranslatef(-9.8, -6.4, -0.8);
 	drawFingers(1, 1.2, 0.3);
 	glPopMatrix();
 
 	//draw fingers left 2
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(-4.5, -4, 1.0);
+	glTranslatef(-9.8, -4.7, -1.5);
 	drawFingers(1, 2,0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(-4.5, -6, 1.0);
+	glTranslatef(-9.8, -5.2, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(-4.5, -7.5, 1.0);
+	glTranslatef(-9.8, -6.4, -1.5);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 	//draw fingers left 3
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(-3, -4, 1.0);
+	glTranslatef(-8.0, -4.3, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(-3, -6, 1.0);
+	glTranslatef(-8.0, -5.0, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(-3, -7.5, 1.0);
+	glTranslatef(-8.0, -6.2, -1.0);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 	//draw fingers right 1
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(2, -3.6, 1.0);
+	glTranslatef(10.8, -4.7, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(2, -5.2, 1.0);
+	glTranslatef(10.8, -5.2, -0.8);
 	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(2, -6.4, 1.0);
+	glTranslatef(10.8, -6.4, -0.8);
 	drawFingers(1, 1.2, 0.3);
 	glPopMatrix();
 
 	//draw fingers right 2
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(0.5, -4, 1.0);
+	glTranslatef(10.8, -4.7, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(0.5, -6, 1.0);
+	glTranslatef(10.8, -5.2, -1.5);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(0.5, -7.5, 1.0);
+	glTranslatef(10.8, -6.4, -1.5);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 	//draw fingers right 3
 	glPushMatrix();
 	glColor3f(0, 0, 1);
-	glTranslatef(-1, -4, 1.0);
+	glTranslatef(9.0, -4.3, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 1, 1);
-	glTranslatef(-1, -6, 1.0);
+	glTranslatef(9.0, -5.0, -1.0);
 	drawFingers(1, 2, 0.3);
 	glPopMatrix();
 	glPushMatrix();
 	glColor3f(1, 0, 0);
-	glTranslatef(-1, -7.5, 1.0);
+	glTranslatef(9.0, -6.2, -1.0);
 	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
-
-
-
-
 	glPopMatrix();
-	//draw thigh
+
+	//draw thigh left
+	glPushMatrix();
+	glTranslatef(-1.9, -1.7, -1.0);
+	drawShoulderSphere(2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 0, 0);
+	glTranslatef(-4.4, -11, -0.9);
+	drawFingers(5, 8, -1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 1, 0);
+	glRotatef(45, 0, 0, 1);
+	glScalef(3, 3, 1);
+	glTranslatef(0, 0, -1.95);
+	drawtrapezoid();
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 1, 0);
+	glTranslatef(-1.9, -12, -1.0);
+	drawShoulderSphere(2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(-4.4, -20, -0.9);
+	drawFingers(5, 8, -1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glRotatef(90, 0, 0, 1);
+	glScalef(3, 3, 1);
+	glTranslatef(-2.6, 1.2, -1.95);
+	drawtrapezoid();
+	glPopMatrix();
+
+	//draw thigh right
+	glPushMatrix();
+	glTranslatef(4.5, -1.7, -1.0);
+	drawShoulderSphere(2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 0, 0);
+	glTranslatef(2.3, -11, -0.9);
+	drawFingers(5, 8, -1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 1, 0);
+	glRotatef(-90, 0, 0, 1);
+	glScalef(3, 3, 1);
+	glTranslatef(4.5, 2.2, -2);
+	drawtrapezoid();
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 1, 0);
+	glTranslatef(4.7, -12, -1.0);
+	drawShoulderSphere(2);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(2.3, -20, -0.9);
+	drawFingers(5, 8, -1.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glRotatef(-45, 0, 0, 1);
+	glScalef(3, 3, 1);
+	glTranslatef(2.5, 0.6, -1.95);
+	drawtrapezoid();
+	glPopMatrix();
+
+	// draw feet left
+
+	glPushMatrix();
+	glScalef(5, 3, 1);
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(2, -7, -0.85);
+	drawtrapezoid();
+	glPopMatrix();
+
+	// draw feet right
+
+	glPushMatrix();
+	glScalef(5, 3, 1);
+	glRotatef(90, 0, 1, 0);
+	glTranslatef(2, -7, 0.45);
+	drawtrapezoid();
+	glPopMatrix();
 
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
