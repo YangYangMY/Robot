@@ -2139,6 +2139,166 @@ void drawBack() {
 	DrawSphere(0.4);
 	glPopMatrix();
 }
+	// ARM
+void drawShoulderSphere(float rad) {
+
+	GLUquadricObj* sphere1 = NULL;
+	glPointSize(4);
+	sphere1 = gluNewQuadric();
+	gluQuadricDrawStyle(sphere1, GLU_FILL);
+	gluSphere(sphere1, rad, 30, 30);
+	gluDeleteQuadric(sphere1);
+
+
+}
+
+void drawShoulderCylinder() {
+	GLUquadricObj* Cylinder = NULL;
+	Cylinder = gluNewQuadric();
+	gluQuadricDrawStyle(Cylinder, GLU_FILL);
+	gluCylinder(Cylinder, 0.5, 0.5, 1, 20, 20);
+	gluDeleteQuadric(Cylinder);
+}
+
+void drawArmLeft(float size) {
+	glBegin(GL_QUADS);
+	//face1 bottom face
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(0.0f, 0.0f, size);
+	//face3 front
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, 0.0f, size);
+	//face4 right
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+	//face5 back
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(size, size, 0.0f);
+	//face6 top
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glEnd();
+}
+
+void drawForeArmLeft1(float size) {
+	glBegin(GL_QUADS);
+	//face1 bottom face
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(0.0f, 0.0f, size);
+	//face3 front
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, 0.0f, size);
+	//face4 right
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+	//face5 back
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(size, size, 0.0f);
+	//face6 top
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glEnd();
+}
+
+void drawForeArmLeft2(float size) {
+	glBegin(GL_QUADS);
+	//face1 bottom face
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(0.0f, 0.0f, size);
+	//face3 front
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, 0.0f, size);
+	//face4 right
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+	//face5 back
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(size, size, 0.0f);
+	//face6 top
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glEnd();
+}
+
+void drawForeArmLeft3(float size) {
+	glBegin(GL_QUADS);
+	//face1 bottom face
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(0.0f, 0.0f, size);
+	//face3 front
+	glVertex3f(0.0f, 0.0f, size);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, 0.0f, size);
+	//face4 right
+	glVertex3f(size, 0.0f, size);
+	glVertex3f(size, size, size);
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(size, 0.0f, 0.0f);
+	//face5 back
+	glVertex3f(size, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(size, size, 0.0f);
+	//face6 top
+	glVertex3f(size, size, 0.0f);
+	glVertex3f(0.0f, size, 0.0f);
+	glVertex3f(0.0f, size, size);
+	glVertex3f(size, size, size);
+	glEnd();
+}
 
 void display() {
 	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
@@ -2184,11 +2344,58 @@ void display() {
 	glPopMatrix();
 	glPopMatrix();
 
+	glPushMatrix();
+
+	//Draw shoulder left
+	glPushMatrix();
+	glTranslatef(-8.8,14, -0.6);
+	drawShoulderSphere(2.5);
+	glPopMatrix();
+	
+	//draw shoulder right
+	glPushMatrix();
+	glTranslatef(10.5, 14, -0.6);
+	drawShoulderSphere(2.5);
+	glPopMatrix();
+
+	//draw arm left
+	glPushMatrix();
+	glScalef(2.5, 5, 1.4);
+	glTranslatef(-4, 1.4, -1.1);
+	drawArmLeft(1.0);
+	glPopMatrix();
+
+	//draw arm right
+	glPushMatrix();
+	glScalef(2.5, 5, 1.4);
+	glTranslatef(3.7, 1.4, -1.1);
+	drawArmLeft(1.0);
+	glPopMatrix();
+
+
+	//draw forearm left
+	glPushMatrix();
+	glScalef(2.5, 5.3, 1.4);
+	glTranslatef(-3.95, 0.6,-1.1);
+	drawForeArmLeft1(0.9);
+	glPopMatrix();
+
+	glPushMatrix();
+	glColor3f(1.0, 0, 0);
+	glScalef(2.5, 5.3, 1.4);
+	glTranslatef(-3.95, 0.3, -1.1);
+	drawForeArmLeft2(0.9);
+	glPopMatrix();
+	glPopMatrix();
+
+
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
 
 	//Step5: Remove texture info.
 	glDisable(GL_TEXTURE_2D);
 }
+
+	//---------------------------------ARM-------------------------------------------------
 
 
 //--------------------------------------------------------------------
