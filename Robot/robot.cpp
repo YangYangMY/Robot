@@ -150,7 +150,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			down -= tspeedd;
 		else if (wParam == 'Y')
 			le += tspeedd;
-		else if (wParam == 'X')
+		else if (wParam == 'U')
 			le -= tspeedd;
 		else if (wParam == '6')
 			ri += tspeedd;
