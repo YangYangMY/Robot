@@ -101,17 +101,34 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == 'W')
-			pty += ptSpeed;
+		{
+			if (pty <= 30) {
+				pty += ptSpeed;
+			}
+		}
 		else if (wParam == 'S')
-			pty -= ptSpeed;
+		{
+			if (pty >= -20) {
+				pty -= ptSpeed;
+			}
+		}
+			
 		else if (wParam == 'O')
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, skysize = 100;
 		else if (wParam == 'D')
-			ptx += ptSpeed;
+					{
+			if (ptx <= 20) {
+				ptx += ptSpeed;
+			}
+		}	
 		else if (wParam == 'A')
-			ptx -= ptSpeed;
+		{
+			if (ptx >= -20) {
+				ptx -= ptSpeed;
+			}
+		}
 		else if (wParam == 'Q')
 			pry -= prSpeed;
 		else if (wParam == 'E')
