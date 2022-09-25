@@ -23,6 +23,7 @@ LPCSTR texture3 = "redMetal.bmp";
 LPCSTR texture4 = "lightblueMetal.bmp";
 LPCSTR texture5 = "red.bmp";
 LPCSTR texture6 = "whiteblueMark.bmp";
+
 float skysize = 100;
 
 //Fanspeeed (CHEST)
@@ -539,43 +540,35 @@ void drawTriangle(float l, float h) {
 	glBegin(GL_TRIANGLES);
 	//drawing triangle in all dimensions
 	  // Front
-	glColor3f(1.0f, 0.0f, 0.0f); // Red
+	glTexCoord2f(0.5, 1);
 	glVertex3f(h, l, 0.0f); // Top Of Triangle (Front)
-
-	glColor3f(0.0f, 1.0f, 0.0f); // Green
+	glTexCoord2f(0, 0);
 	glVertex3f(-h, -h, h); // Left Of Triangle (Front)
-
-	glColor3f(0.0f, 0.0f, 1.0f); // Blue
+	glTexCoord2f(1, 0);
 	glVertex3f(h, -h, h); // Right Of Triangle (Front)
 
 	// Right
-	glColor3f(1.0f, 0.0f, 0.0f); // Red
+	glTexCoord2f(0.5, 1);
 	glVertex3f(h, l, 0.0f); // Top Of Triangle (Right)
-
-	glColor3f(0.0f, 0.0f, 1.0f); // Blue
+	glTexCoord2f(0, 0);
 	glVertex3f(h, -h, h); // Left Of Triangle (Right)
-
-	glColor3f(0.0f, 1.0f, 0.0f); // Green
+	glTexCoord2f(1, 0);
 	glVertex3f(h, -h, -h); // Right Of Triangle (Right)
 
 	// Left
-	glColor3f(1.0f, 0.0f, 0.0f); // Red
+	glTexCoord2f(0.5, 1);
 	glVertex3f(h, l, 0.0f); // Top Of Triangle (Back)
-
-	glColor3f(0.0f, 1.0f, 0.0f); // Green
+	glTexCoord2f(0, 0);
 	glVertex3f(h, -h, -h); // Left Of Triangle (Back)
-
-	glColor3f(0.0f, 0.0f, 1.0f); // Blue
+	glTexCoord2f(1, 0);
 	glVertex3f(-h, -h, -h); // Right Of Triangle (Back)
 
 	//left
-	glColor3f(0.0f, 1.0f, 0.0f); // Red
+	glTexCoord2f(0.5, 1);
 	glVertex3f(h, l, 0.0f); // Top Of Triangle (Left)
-
-	glColor3f(0.0f, 0.0f, 1.0f); // Blue
+	glTexCoord2f(0, 0);
 	glVertex3f(-h, -h, -h); // Left Of Triangle (Left)
-
-	glColor3f(0.0f, 1.0f, 0.0f); // Green
+	glTexCoord2f(1, 0);
 	glVertex3f(-h, -h, h); // Right Of Triangle (Left)
 
 	glEnd();
@@ -2649,37 +2642,47 @@ void drawBack() {
 }
 
 void drawHead() {
+	GLuint headtextureArr[20];		//initialize texture
+	
+	
 	glPushMatrix();
 	//Draw head
-
 	glPushMatrix();						//L part
 	glTranslatef(0.2, 0.7, 0.42);
-	glColor3f(0.6, 0.737, 1.0);
+	headtextureArr[0] = loadTexture(texture4);
 	DrawSphere(0.4);
 	glPopMatrix();
 
+	glPushMatrix();						//A part
+	drawRectangle(0.4, 0.4, 0.65);
+	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[0]);
+
+	
 	glPushMatrix();						//I part
-	glTranslatef(0.1, 0.5, 0.007);
-	glColor3f(0.0, 0.0, 1.0);
+	glTranslatef(0.1, 0.5, 0.003);
+	headtextureArr[1] = loadTexture(texture2);
 	drawRectangle(0.202, 0.65, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[1]);
 
-	glPushMatrix();						//A part
-	glColor3f(0.6, 0.75, 1.0);
-	drawRectangle(0.4, 0.4, 0.6);
-	glPopMatrix();
 
+	
 	glPushMatrix();						//B part
 	glTranslatef(0.1, 0.4, 0.0);
-	glColor3f(0.0, 1.0, 1.0);
+	headtextureArr[2] = loadTexture(texture1);
 	drawRectangle(0.2, 0.12, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[2]);
+
 
 	glPushMatrix();						//C part
 	glRotatef(90.0, 0.0, 0.0, 1.0);
 	glTranslatef(0.2, 0.2, 0.2);
+	headtextureArr[3] = loadTexture(texture6);
 	drawTriangle(0.1, 0.2);
 	glPopMatrix();
+	
 
 	glPushMatrix();						//D part
 	glRotatef(90.0, 0.0, 0.0, 1.0);
@@ -2688,23 +2691,27 @@ void drawHead() {
 	glTranslatef(0.2, 0.6, -0.2);
 	drawTriangle(0.1, 0.2);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();						//E part
 	glTranslatef(-0.3, 0.4, 0.0);
-	glColor3f(0.6, 0.737, 1.0);
+	headtextureArr[0] = loadTexture(texture4);
 	drawCube(0.4);
 	glPopMatrix();
 
 	glPushMatrix();						//F part
 	glTranslatef(0.3, 0.4, 0.0);
-	glColor3f(0.6, 0.737, 1.0);
 	drawCube(0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[0]);
+
 
 	glPushMatrix();						//G part
 	glRotatef(180.0, 1.0, 0.0, 0.0);
 	glRotatef(180.0, 0.0, 0.0, 1.0);
 	glTranslatef(0.105, 1.0, -0.2);
+	headtextureArr[3] = loadTexture(texture6);
 	drawTriangle(0.007, 0.2);
 	glPopMatrix();
 
@@ -2712,123 +2719,138 @@ void drawHead() {
 	glTranslatef(0.5, 1.0, 0.2);
 	drawTriangle(0.007, 0.2);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();						//J part
 	glTranslatef(-0.5, 0.3, 0.007);
-	glColor3f(0.0, 0.0, 1.0);
+	headtextureArr[1] = loadTexture(texture2);
 	drawRectangle(0.202, 0.75, 0.4);
 	glPopMatrix();
 
 	glPushMatrix();						//K part
 	glTranslatef(0.7, 0.3, 0.007);
-	glColor3f(0.0, 0.0, 1.0);
 	drawRectangle(0.202, 0.75, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[1]);
 
+	
 	glPushMatrix();						//M part
 	glTranslatef(-1.3, 0.8, 0.0);
-	glColor3f(0.0, 1.0, 1.0);
+	headtextureArr[2] = loadTexture(texture1);
 	drawRectangle(0.8, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[2]);
 
+	
 	glPushMatrix();						//N part
 	glTranslatef(-1.2, 0.55, 0.0);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[3] = loadTexture(texture6);
 	drawRectangle(0.7, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();						//O part
 	glTranslatef(-1.1, 0.3, 0.0);
-	glColor3f(0.0, 1.0, 1.0);
+	headtextureArr[2] = loadTexture(texture1);
 	drawRectangle(0.6, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[2]);
 
+	
 	glPushMatrix();						//P part
 	glTranslatef(0.9, 0.8, 0.0);
-	glColor3f(0.0, 1.0, 1.0);
+	headtextureArr[2] = loadTexture(texture1);
 	drawRectangle(0.8, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[2]);
 
+	
 	glPushMatrix();						//Q part
 	glTranslatef(0.9, 0.55, 0.0);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[3] = loadTexture(texture6);
 	drawRectangle(0.7, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();						//R part
 	glTranslatef(0.9, 0.3, 0.0);
-	glColor3f(0.0, 1.0, 1.0);
+	headtextureArr[2] = loadTexture(texture1);
 	drawRectangle(0.6, 0.25, 0.4);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[2]);
 
 	glPopMatrix();
 
 	glPushMatrix();
 	//Draw Eyes
+	
 	glPushMatrix();
 	glTranslatef(-0.03, 0.52, -0.07);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[4] = loadTexture("robotEye.bmp");
 	drawRectangle(0.13, 0.08, 0.3);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();
 	glRotatef(90.0, 0.0, 0.0, 1.0);
 	glTranslatef(0.56, 0.07, -0.02);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[1] = loadTexture(texture2);
 	DrawPyramid(0.04);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[1]);
 
+	
 	glPushMatrix();
 	glTranslatef(0.3, 0.52, -0.05);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[4] = loadTexture("robotEye.bmp");
 	drawRectangle(0.13, 0.08, 0.3);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[3]);
 
+	
 	glPushMatrix();
 	glRotatef(-90.0, 0.0, 0.0, 1.0);
 	glTranslatef(-0.56, 0.47, -0.02);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[1] = loadTexture(texture2);
 	DrawPyramid(0.04);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[1]);
 	glPopMatrix();
-
-
+	
+	
 	glPushMatrix();
 	//Draw Nose
+	
 	glPushMatrix();
 	glTranslatef(0.16, 0.3, -0.07);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[5] = loadTexture(texture3);
 	drawRectangle(0.08, 0.1, 0.3);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[5]);
 
 	glPushMatrix();
 	glRotatef(-180.0, 0.0, 0.0, 1.0);
 	glTranslatef(-0.2, -0.26, -0.015);
-	glColor3f(1.0, 1.0, 1.0);
+	headtextureArr[5] = loadTexture(texture3);
 	DrawPyramid(0.04);
 	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[5]);
 	glPopMatrix();
 
 
 	glPushMatrix();
 	//Draw Neck
 	glPushMatrix();
-	glColor3f(0.0, 0.0, 1.0);
+	
 	glTranslatef(0.05, -0.4, 0.2);
-	drawRectangle(0.3, 0.4, 0.4);
+	headtextureArr[1] = loadTexture(texture2);
+	drawRectangle(0.3, 1.0, 0.4);
 	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.0, 1.0, 1.0);
-	glTranslatef(0.0, -0.4, 0.2);
-	drawRectangle(0.05, 0.4, 0.4);
-	glPopMatrix();
-
-	glPushMatrix();
-	glColor3f(0.0, 1.0, 1.0);
-	glTranslatef(0.35, -0.4, 0.2);
-	drawRectangle(0.05, 0.4, 0.4);
-	glPopMatrix();
+	glDeleteTextures(1, &headtextureArr[1]);
 	glPopMatrix();
 }
 

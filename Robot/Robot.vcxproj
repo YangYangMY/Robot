@@ -139,6 +139,7 @@
     <Image Include="pink1.bmp" />
     <Image Include="red.bmp" />
     <Image Include="redMetal.bmp" />
+    <Image Include="robotEye.bmp" />
     <Image Include="smoke.bmp" />
     <Image Include="sun.bmp" />
     <Image Include="water.bmp" />
