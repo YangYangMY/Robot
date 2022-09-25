@@ -140,6 +140,7 @@
     <Image Include="red.bmp" />
     <Image Include="redMetal.bmp" />
     <Image Include="smoke.bmp" />
+    <Image Include="sun.bmp" />
     <Image Include="water.bmp" />
     <Image Include="white3.bmp" />
     <Image Include="whiteblueMark.bmp" />
