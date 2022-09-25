@@ -2143,7 +2143,7 @@ void drawBack() {
 void drawShoulderSphere(float rad) {
 	
 	GLuint Sphere1textureArr[1];
-	Sphere1textureArr[1] = loadTexture("darkblueMetal.bmp");
+	Sphere1textureArr[0] = loadTexture("darkblueMetal.bmp");
 	GLUquadricObj* sphere1 = NULL;
 	glPointSize(4);
 	sphere1 = gluNewQuadric();
@@ -2151,7 +2151,7 @@ void drawShoulderSphere(float rad) {
 	gluQuadricTexture(sphere1, true);
 	gluSphere(sphere1, rad, 30, 30);
 	gluDeleteQuadric(sphere1);
-	glDeleteTextures(1, &Sphere1textureArr[1]);
+	glDeleteTextures(1, &Sphere1textureArr[0]);
 
 }
 
@@ -2165,73 +2165,129 @@ void drawShoulderCylinder() {
 }
 
 void drawArmLeft(float size) {
+
+	GLuint ArmtextureArr[1];
+	ArmtextureArr[0] = loadTexture("lightblueMetal.bmp");
 	glBegin(GL_QUADS);
 	//face1 bottom face
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(size, 0.0f, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	//face2 left
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, size);
 	//face3 front
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, 0.0f, size);
 	//face4 right
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(size, size, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, size, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, 0.0f, 0.0f);
 	//face5 back
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, size, 0.0f);
 	//face6 top
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, size, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, size, size);
 	glEnd();
+	glDeleteTextures(1, &ArmtextureArr[0]);
 }
 
 void drawForeArmLeft1(float size) {
+
+	GLuint ForeArmtextureArr[1];
+	ForeArmtextureArr[0] = loadTexture("lightblueMetal.bmp");
 	glBegin(GL_QUADS);
 	//face1 bottom face
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(size, 0.0f, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	//face2 left
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, size);
 	//face3 front
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, 0.0f, size);
 	//face4 right
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, 0.0f, size);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(size, size, size);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(size, size, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, 0.0f, 0.0f);
 	//face5 back
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, 0.0f, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, size, 0.0f);
 	//face6 top
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(size, size, 0.0f);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(0.0f, size, 0.0f);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0.0f, size, size);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(size, size, size);
 	glEnd();
+	glDeleteTextures(1, &ForeArmtextureArr[0]);
 }
 
 void drawForeArmLeft2(float size) {
@@ -2305,60 +2361,85 @@ void drawForeArmLeft3(float size) {
 }
 
 void drawtrapezoid() {
-
+	GLuint trapezoidtextureArr[1];
+	trapezoidtextureArr[0] = loadTexture("blackMetal.bmp");
 
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5, 1, 0);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.5, 1, 0);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-2.0, 0, 0);
 
 	glEnd();
 
 	glBegin(GL_POLYGON);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, 0, 1);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5, 1, 1);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-1.5, 1, 1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-2.0, 0, 1);
 
 	glEnd();
 
 	glBegin(GL_QUADS);
-	glColor3f(0, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, 0, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-0.5, 1, 0);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.5, 1, 1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(0, 0, 1);
 	glEnd();
 
 	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(0, 0, 1);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(0, 0, 0);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-2, 0, 0);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-2, 0, 1);
 	glEnd();
 
 	glBegin(GL_QUADS);
-	glColor3f(0, 0, 1);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.5, 1, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-1.5, 1, 1);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-2.0, 0, 1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-2.0, 0, 0);
 	glEnd();
 
 	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.5, 1, 0);
+	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-1.5, 1, 1);
+	glTexCoord2f(1.0f, 0.0f);
 	glVertex3f(-0.5, 1, 1);
+	glTexCoord2f(1.0f, 1.0f);
 	glVertex3f(-0.5, 1, 0);
 	glEnd();
 
 	glPopMatrix();
+	glDeleteTextures(1, &trapezoidtextureArr[0]);
 }
 
 void drawFingers(float l, float w, float h) {
+	GLuint fingertextureArr[1];
+	fingertextureArr[0] = loadTexture("redMetal.bmp");
 	glBegin(GL_QUADS);
 	//face 1 down
 	glTexCoord2f(0, 1);
@@ -2438,6 +2519,7 @@ void drawFingers(float l, float w, float h) {
 	glTexCoord2f(0, 0);
 	glVertex3f(0, 0, 0);
 	glEnd();
+	glDeleteTextures(1, &fingertextureArr[0]);
 }
 
 void display() {
@@ -2663,13 +2745,11 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 0, 0);
 	glTranslatef(-4.4, -11, -0.9);
 	drawFingers(5, 8, -1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 1, 0);
 	glRotatef(45, 0, 0, 1);
 	glScalef(3, 3, 1);
 	glTranslatef(0, 0, -1.95);
@@ -2677,19 +2757,16 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 1, 0);
 	glTranslatef(-1.9, -12, -1.0);
 	drawShoulderSphere(2);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(-4.4, -20, -0.9);
 	drawFingers(5, 8, -1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glRotatef(90, 0, 0, 1);
 	glScalef(3, 3, 1);
 	glTranslatef(-2.6, 1.2, -1.95);
@@ -2703,13 +2780,11 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 0, 0);
 	glTranslatef(2.3, -11, -0.9);
 	drawFingers(5, 8, -1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 1, 0);
 	glRotatef(-90, 0, 0, 1);
 	glScalef(3, 3, 1);
 	glTranslatef(4.5, 2.2, -2);
@@ -2717,19 +2792,16 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 1, 0);
 	glTranslatef(4.7, -12, -1.0);
 	drawShoulderSphere(2);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(0, 0, 1);
 	glTranslatef(2.3, -20, -0.9);
 	drawFingers(5, 8, -1.0);
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(1, 0, 0);
 	glRotatef(-45, 0, 0, 1);
 	glScalef(3, 3, 1);
 	glTranslatef(2.5, 0.6, -1.95);
