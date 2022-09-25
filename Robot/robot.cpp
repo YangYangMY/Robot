@@ -442,7 +442,7 @@ void projection() {
 	else {
 		//Perspective View
 	gluPerspective(20, 1.0, -1, 1);
-	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
+	glFrustum(-20.0, 20.0, -20.0, 20.0, PNear, PFar);
 	}
 	glTranslatef(tx, 0, tz);
 }
@@ -2354,38 +2354,85 @@ void drawtrapezoid() {
 	glPopMatrix();
 }
 
-void drawFingers(float size) {
+void drawFingers(float l, float w, float h) {
 	glBegin(GL_QUADS);
-	//face1 bottom face
-	glVertex3f(0.0f, 0.0f, size);
-	glVertex3f(size, 0.0f, size);
-	glVertex3f(size, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	//face2 left
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, size, 0.0f);
-	glVertex3f(0.0f, size, size);
-	glVertex3f(0.0f, 0.0f, size);
-	//face3 front
-	glVertex3f(0.0f, 0.0f, size);
-	glVertex3f(0.0f, size, size);
-	glVertex3f(size, size, size);
-	glVertex3f(size, 0.0f, size);
-	//face4 right
-	glVertex3f(size, 0.0f, size);
-	glVertex3f(size, size, size);
-	glVertex3f(size, size, 0.0f);
-	glVertex3f(size, 0.0f, 0.0f);
-	//face5 back
-	glVertex3f(size, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, size, 0.0f);
-	glVertex3f(size, size, 0.0f);
-	//face6 top
-	glVertex3f(size, size, 0.0f);
-	glVertex3f(0.0f, size, 0.0f);
-	glVertex3f(0.0f, size, size);
-	glVertex3f(size, size, size);
+	//face 1 down
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, 0, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, 0, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, h);
+
+	//face 2 face
+	glTexCoord2f(0, 1);
+	glVertex3f(0, 0, h);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, 0, h);
+
+	//face 3 right
+	glTexCoord2f(0, 1);
+	glVertex3f(l, 0, h);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(l, w, 0);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, 0, 0);
+
+	//face 4 face bottom
+	glTexCoord2f(0, 1);
+	glVertex3f(l, 0, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, 0, 0);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, w, 0);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(l, w, 0);
+
+	//face 5 above
+	glTexCoord2f(0, 1);
+	glVertex3f(l, w, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(l, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, w, 0);
+
+	//face 6 left
+	glTexCoord2f(0, 1);
+	glVertex3f(0, w, 0);
+
+	glTexCoord2f(1, 1);
+	glVertex3f(0, w, h);
+
+	glTexCoord2f(1, 0);
+	glVertex3f(0, 0, h);
+
+	glTexCoord2f(0, 0);
+	glVertex3f(0, 0, 0);
 	glEnd();
 }
 
@@ -2434,7 +2481,7 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-
+	glColor3f(1, 1, 1);
 	//Draw shoulder left
 	glPushMatrix();
 	glTranslatef(-8.8,14, -0.6);
@@ -2502,15 +2549,112 @@ void display() {
 	drawtrapezoid();
 	glPopMatrix();
 	
-	//draw fingers left
+	//draw fingers left 1
 	glPushMatrix();
-	glRotatef(90, 1, 0, 0);
-	glTranslatef(-4.5, 0, -1.0);
-	drawFingers(0.45);
+	glColor3f(0, 0, 1);
+	glTranslatef(-6, -3.6, 1.0);
+	drawFingers(1, 1.6, 0.3);
 	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(-6, -5.2, 1.0);
+	drawFingers(1, 1.6, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(-6, -6.4, 1.0);
+	drawFingers(1, 1.2, 0.3);
+	glPopMatrix();
+
+	//draw fingers left 2
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(-4.5, -4, 1.0);
+	drawFingers(1, 2,0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(-4.5, -6, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(-4.5, -7.5, 1.0);
+	drawFingers(1, 1.5, 0.3);
+	glPopMatrix();
+
+	//draw fingers left 3
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(-3, -4, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(-3, -6, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(-3, -7.5, 1.0);
+	drawFingers(1, 1.5, 0.3);
+	glPopMatrix();
+
+	//draw fingers right 1
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(2, -3.6, 1.0);
+	drawFingers(1, 1.6, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(2, -5.2, 1.0);
+	drawFingers(1, 1.6, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(2, -6.4, 1.0);
+	drawFingers(1, 1.2, 0.3);
+	glPopMatrix();
+
+	//draw fingers right 2
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(0.5, -4, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(0.5, -6, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(0.5, -7.5, 1.0);
+	drawFingers(1, 1.5, 0.3);
+	glPopMatrix();
+
+	//draw fingers right 3
+	glPushMatrix();
+	glColor3f(0, 0, 1);
+	glTranslatef(-1, -4, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 1, 1);
+	glTranslatef(-1, -6, 1.0);
+	drawFingers(1, 2, 0.3);
+	glPopMatrix();
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glTranslatef(-1, -7.5, 1.0);
+	drawFingers(1, 1.5, 0.3);
 	glPopMatrix();
 
 
+
+
+	glPopMatrix();
 	//draw thigh
 
 
