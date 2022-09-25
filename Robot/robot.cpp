@@ -2606,7 +2606,7 @@ void display() {
 	
 	
 	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(-3, 1.4,0.4);
+	glTranslatef(-3, 1.6,-0.2);
 	glRotatef(-180, 0, 0, 1);
 	glRotatef(90, 0, 1, 0);
 	glRotatef(down, 0, 0, 1);
