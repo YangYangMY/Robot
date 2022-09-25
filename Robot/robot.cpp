@@ -33,10 +33,19 @@ float fanspeed = 5, fanrotate = 0;
 
 //SmokeSpeed (JETPACK)
 float smokespeed = 0, smokedrop = -16;
+
+//GunSpeed (GUN)
+float gunspeed = 0, bulletpos1 = -4, bulletpos2 = -4;
+
+//ROCKET
+float Fly = 0, FlySpeed = 0, rocketpos1 = 6;
+
 //For texture
 GLuint texture = 0;			//texture name
 BITMAP BMP;					//bitmap structure
 HBITMAP hBMP = NULL;		//bitmap handle
+
+
 
 //Lighting
 float a = 0, b = 20, c = 0;
@@ -51,6 +60,9 @@ float MWhite[3] = { 1.0, 1.0, 0.0 };	//white material
 bool isLightOn = false;
 bool isDiffuse = true;
 bool lightcheck = true;
+
+float headAngle = 0;
+boolean headTurnRight, headTurnLeft;
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -91,29 +103,43 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			}
 		}
 		else if (wParam == 'W')
-			pty += ptSpeed;
+		{
+			if (pty <= 30) {
+				pty += ptSpeed;
+			}
+		}
 		else if (wParam == 'S')
-			pty -= ptSpeed;
+		{
+			if (pty >= -20) {
+				pty -= ptSpeed;
+			}
+		}
+			
 		else if (wParam == 'O')
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, skysize = 100;
 		else if (wParam == 'D')
-			ptx += ptSpeed;
+					{
+			if (ptx <= 20) {
+				ptx += ptSpeed;
+			}
+		}	
 		else if (wParam == 'A')
-			ptx -= ptSpeed;
+		{
+			if (ptx >= -20) {
+				ptx -= ptSpeed;
+			}
+		}
 		else if (wParam == 'Q')
 			pry -= prSpeed;
 		else if (wParam == 'E')
 			pry += prSpeed;
-		else if (wParam == 'O')
-			isOrtho = true;
-		else if (wParam == 'P')
-			isOrtho = false, tz = 10;
 		else if (wParam == 'Z')
 			fanspeed += 10;
 		else if (wParam == 'X')
 			fanspeed -= 10;
+
 		else if (wParam == 'G')
 			up += tspeedd;
 		else if (wParam == 'V')
@@ -242,6 +268,19 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		posB[1] = 0.0;
 		posB[2] = 0.0;
 		angle = 0;
+		//RESET GUN
+		gunspeed = 0;
+		bulletpos1 = -4;
+		//RESET ROCKET
+		gunspeed = 0;
+		bulletpos1 = -4;
+
+		}
+		else if (wParam == 'R') {
+			headTurnRight = true;
+		}
+		else if (wParam == 'T') {
+			headTurnLeft == true;
 		}
 		break;
 	default:
@@ -729,6 +768,139 @@ GLuint loadTexture(LPCSTR filename) {
 
 
 //-----------------------------------Start Draw Robot Function----------------------------------------------------------
+void Ncube(float sz) {
+	glBegin(GL_POLYGON);
+	//face1 bottom face
+	//glColor3f(1.0, 1.0, 1.0);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.0f, 0.0f, sz);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(sz, 0.0f, sz);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(sz, 0.0f, 0.0f);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	//face2 left
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.0f, sz, sz);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.0f, 0.0f, sz);
+	//face3 front
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.0f, 0.0f, sz);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.0f, sz, sz);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.3 * sz, sz, sz); 
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(sz, 0.0f, sz);
+	//face4 right
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(sz, 0.0f, sz);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.3 * sz, sz, sz); 
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.3 * sz, sz, 0.0f);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(sz, 0.0f, 0.0f);
+	//face5 back
+
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(sz, 0.0f, 0.0f);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.3 * sz, sz, 0.0f);
+	//face6 top
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(0.3 * sz, sz, 0.0f);
+	glTexCoord2f(1.0, 1.0);
+	glVertex3f(0.0f, sz, 0.0f);
+	glTexCoord2f(1.0, 0.0);
+	glVertex3f(0.0f, sz, sz);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(0.3 * sz, sz, sz);
+	glEnd();
+}
+
+void feidan() {
+	GLuint texture[2];
+	texture[0] = loadTexture("whitegrey.bmp");
+	Fly += FlySpeed;
+	glPushMatrix();
+	glTranslatef(9.4, 9.2, 14.0);
+	glRotatef(Fly, 0.1, 0.0, 1.0);
+	glScalef(0.35, 0.35, 0.35);
+	DrawCylinder(0.9, 0.0, 3.0);
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -2);
+	DrawCylinder(1.1, 0.9, 2.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -6.0);
+	DrawCylinder(1.1, 1.1, 4.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(0.0, 0.0, -9.0);
+	DrawCylinder(0.8, 1.1, 3.0);
+	glPopMatrix();
+	glDeleteTextures(1, &texture[0]);
+	texture[1] = loadTexture("red.bmp");
+	glPushMatrix();
+	glTranslatef(-2.0, -0.2, -6.5);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	glScalef(0.4, 1.0, 0.1);
+	Ncube(4.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(2.0, 0.3, -6);
+	glRotatef(-180, 0.0, 0.0, 1.0);
+	glPushMatrix();
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	glScalef(0.4, 1.0, 0.1);
+	Ncube(4.0);
+	glPopMatrix();
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glRotatef(90, 0.0, 0.0, 1.0);
+	glPushMatrix();
+	glTranslatef(-2.0, -0.2, -6.0);
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	glScalef(0.4, 1.0, 0.1);
+	Ncube(4.0);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(2.0, 0.3, -6);
+	glRotatef(-180, 0.0, 0.0, 1.0);
+	glPushMatrix();
+	glRotatef(-90, 1.0, 0.0, 0.0);
+	glScalef(0.4, 1.0, 0.1);
+	Ncube(4.0);
+	glPopMatrix();
+	glPopMatrix();
+	glPopMatrix();
+
+	glPopMatrix();
+	glDeleteTextures(1, &texture[1]);
+
+}
+
 void drawWaist() {
 	GLuint waisttextureArr[5];		//initialize texture
 	waisttextureArr[0] = loadTexture(texture1);
@@ -2719,6 +2891,25 @@ void drawHead() {
 	GLuint headtextureArr[20];		//initialize texture
 	
 	
+
+	glPushMatrix();
+	//Animation for head
+	glRotatef(headAngle, 0.0, 1.0, 0.0);
+
+	if (headTurnRight == true) {
+		if (headAngle <= 30 && headAngle != 30) {
+			headAngle += 0.5;
+			headTurnLeft = true;
+		}
+	}
+	else {
+		if (headAngle >= 0 && headAngle != 0) {
+			headAngle -= 0.5;
+		}
+	}
+
+
+
 	glPushMatrix();
 	//Draw head
 	glPushMatrix();						//L part
@@ -2915,6 +3106,7 @@ void drawHead() {
 	glDeleteTextures(1, &headtextureArr[5]);
 	glPopMatrix();
 
+	glPopMatrix();
 
 	glPushMatrix();
 	//Draw Neck
@@ -2926,6 +3118,56 @@ void drawHead() {
 	glPopMatrix();
 	glDeleteTextures(1, &headtextureArr[1]);
 	glPopMatrix();
+	glPopMatrix();
+}
+
+void drawGun() {
+	GLuint guntextureArr[2];		//initialize texture
+	guntextureArr[0] = loadTexture("whitegrey.bmp");
+	glPushMatrix();							//gun middle
+	glTranslatef(1, -2, -5);
+	drawRectangle(1, 1, 4);
+	glPopMatrix();
+
+	glPushMatrix();							//gun middle
+	glRotatef(90, 1, 0, 0);
+	glTranslatef(1.1, -2, 1);
+	drawRectangle(0.8, 1.2, 2);
+	glPopMatrix();
+
+	glDeleteTextures(1, &guntextureArr[0]);
+
+	guntextureArr[0] = loadTexture("black1.bmp");
+	glPushMatrix();							//gun top
+	glTranslatef(1.3, -1, -5);
+	drawRectangle(0.5, 0.5, 0.2);
+	glPopMatrix();
+
+	glPushMatrix();						//gun hole
+	glTranslatef(1.5, -1.4, -5.4);
+	DrawCylinder(0.3, 0, 2);
+	glPopMatrix();
+
+	glDeleteTextures(1, &guntextureArr[0]);
+
+	//gun bullet
+	guntextureArr[1] = loadTexture("red.bmp");
+	glPushMatrix();
+	glTranslatef(1.5, -1.4, bulletpos1);
+	DrawCylinder(0.3, 0, 2);
+	DrawSphere(0.3);
+	glPopMatrix();
+
+	glDeleteTextures(1, &guntextureArr[1]);
+	bulletpos1 -= gunspeed;
+	
+	bulletpos1 -= gunspeed;
+
+	if (bulletpos1 <= -40) {
+		bulletpos1 = -4;
+
+	}
+
 }
 
 void drawShoulderSphere(float rad) {
@@ -3657,7 +3899,6 @@ void display() {
 	drawHead();
 	glColor3f(1.0, 1.0, 1.0);
 	glPopMatrix();
-
 	glPopMatrix();
 
 
@@ -3677,6 +3918,24 @@ void display() {
 	glScalef(0.4, 0.4, 0.4);
 	feidan();
 	glPopMatrix();
+
+	//draw gun 1
+	glPushMatrix();
+	glTranslatef(2, 6.5, 3);
+	drawGun();
+	glPopMatrix();
+	glPushMatrix();
+	glTranslatef(-6.5, 6.5, 3);
+	drawGun();
+	glPopMatrix();
+
+	glPushMatrix();						//rocket 1
+	glTranslatef(-1.4, 1.2, rocketpos1);
+	glRotatef(180, 0, 1, 0);
+	glScalef(0.4, 0.4, 0.4);
+	feidan();
+	glPopMatrix();
+
 
 	glPushMatrix();						//rocket 2
 	glTranslatef(7.2, 1.2, rocketpos1);

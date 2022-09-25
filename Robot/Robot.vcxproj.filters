@@ -62,5 +62,11 @@
     <Image Include="robotEye.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="black1.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="gunside.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

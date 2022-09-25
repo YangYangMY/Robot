@@ -132,9 +132,11 @@
     <ClCompile Include="robot.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="black1.bmp" />
     <Image Include="blackMetal.bmp" />
     <Image Include="darkblueMetal.bmp" />
     <Image Include="greenMetal.bmp" />
+    <Image Include="gunside.bmp" />
     <Image Include="lightblueMetal.bmp" />
     <Image Include="pink1.bmp" />
     <Image Include="red.bmp" />
