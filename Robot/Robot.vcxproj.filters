@@ -47,5 +47,14 @@
     <Image Include="whiteblueMark.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="rainbowGradient.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="whitegrey.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="redCrystal.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

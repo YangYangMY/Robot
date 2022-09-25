@@ -129,14 +129,8 @@ bool initPixelFormat(HDC hdc)
 //--------------------------------------------------------------------SHAPES and Polygons-------------------------
 
 void DrawSphere(double r) {
-
-
 	GLUquadricObj* sphere = NULL;
-	glPointSize(2);
 	sphere = gluNewQuadric();
-
-
-
 	gluQuadricDrawStyle(sphere, GLU_FILL);
 	gluSphere(sphere, r, 30, 30);
 	gluDeleteQuadric(sphere);
@@ -424,6 +418,13 @@ void DrawPyramid(float sz) {
 	glEnd();
 }
 
+void circleFill(float r, int sl, int st) {
+	GLUquadricObj* leftc = NULL;
+	leftc = gluNewQuadric();
+	gluQuadricDrawStyle(leftc, GLU_FILL);
+	gluSphere(leftc, r, sl, st);
+	gluDeleteQuadric(leftc);
+}
 
 //-------------------------------------PROJECTION--------------------------------------------
 void projection() {
@@ -437,7 +438,7 @@ void projection() {
 
 	if (isOrtho) {
 		//Ortho View
-		glOrtho(-20.0, 20.0, -20.0, 20.0, ONear, OFar);
+		glOrtho(-15.0, 15.0, -15.0, 15.0, ONear, OFar);
 	}
 	else {
 		//Perspective View
@@ -1510,11 +1511,14 @@ void drawChest() {
 	glEnd();
 	glDeleteTextures(1, &chesttextureArr[0]);
 
+	//Draw RED CRYSTAL INFRONT body
+	chesttextureArr[2] = loadTexture("redCrystal.bmp");
 
+	glDeleteTextures(1, &chesttextureArr[2]);
 }
 
 void drawBack() {
-	GLuint backtextureArr[5];		//initialize texture
+	GLuint backtextureArr[20];		//initialize texture
 	backtextureArr[0] = loadTexture("whiteblueMark.bmp");
 
 	//-----------------------------------------------------MIDDLE PART --------------------------------------------------
@@ -1924,7 +1928,7 @@ void drawBack() {
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[2]);
 	//-------------------------------------------------Right side jetpack---------------------------------
-	backtextureArr[1] = loadTexture("whiteblueMark.bmp");
+	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
 	glVertex3f(3, -3.7, -15);
@@ -2133,11 +2137,129 @@ void drawBack() {
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[1]);
 
-	//-------------------------jetpack middle-----------------------------------------------------
+	//------------------------------jetpack middle
+	backtextureArr[3] = loadTexture("redCrystal.bmp");
 	glPushMatrix();
-	glTranslatef(-0.2, -5, -20);
-	DrawSphere(0.4);
+	glTranslatef(0.8,-3.2, -19);
+	DrawSphere(0.5);
 	glPopMatrix();
+	glDeleteTextures(1, &backtextureArr[3]);
+
+	//-----------------------------------JETPACK ADD DETAILS
+	//jetpack right bottom
+	backtextureArr[4] = loadTexture("whiteblueMark.bmp");
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(-2.2, -3.8, -16);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-3.8, -3.8, -16);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-3.8, -3.85, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-2.2, -3.85, -20);
+
+
+	//jetpack left bottom
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(3.7, -3.8, -16);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(5.3, -3.8, -16);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(5.3, -3.85, -20);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.7, -3.85, -20);
+
+
+	//--------------------------------------------LEFT TOP
+
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(-3.9, -3.85, -23);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-2, -3.85, -23);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-2, -3.7, -29);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-3.3, -3.7, -29);
+
+	//--------------------------------------------right TOP
+
+	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
+	glVertex3f(5.4, -3.85, -23);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.5, -3.85, -23);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.5, -3.7, -29);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(4.8, -3.7, -29);
+
+	glEnd();
+
+	glDeleteTextures(1, &backtextureArr[4]);
+
+	//black line 
+	backtextureArr[5] = loadTexture("blackMetal.bmp");
+	glPushMatrix();							//left jetpack bottom
+	glTranslatef(-3.8, -3.85, -18.3);
+	drawRectangle(1.6, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//left jetpack top 1
+	glTranslatef(-3.8, -3.85, -24.5);
+	drawRectangle(1.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//left jetpack top 2
+	glTranslatef(-3.6, -3.85, -26.5);
+	drawRectangle(1.6, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//left jetpack top 3
+	glTranslatef(-3.4, -3.75, -28);
+	drawRectangle(1.5, 0.1, 0.3);
+	glPopMatrix();
+
+	//right
+	glPushMatrix();							//right jetpack bottom
+	glTranslatef(3.7, -3.85, -18.3);
+	drawRectangle(1.6, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//right jetpack top 1
+	glTranslatef(3.5, -3.85, -24.5);
+	drawRectangle(1.9, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//right jetpack top 2
+	glTranslatef(3.5, -3.85, -26.5);
+	drawRectangle(1.6, 0.1, 0.3);
+	glPopMatrix();
+
+	glPushMatrix();							//right jetpack top 3
+	glTranslatef(3.4, -3.75, -28);
+	drawRectangle(1.5, 0.1, 0.3);
+	glPopMatrix();
+
+	//jetpack front black holes
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
+	glVertex3f(-4.3, -2.85, -19);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(-1.7, -2.85, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-1.9, -2.85, -31.5);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(-3.4, -2.85, -31.5);
+
+	glTexCoord2f(0.0f, 0.0f);			//back (FROM BEHIND)
+	glVertex3f(5.8, -2.85, -19);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.2, -2.85, -19);
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(3.4, -2.85, -31.5);
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(4.9, -2.85, -31.5);
+	glEnd();
+	glDeleteTextures(1, &backtextureArr[5]);
 }
 
 void display() {
@@ -2183,7 +2305,6 @@ void display() {
 	drawBack();
 	glPopMatrix();
 	glPopMatrix();
-
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
 
 	//Step5: Remove texture info.
@@ -2207,7 +2328,7 @@ int WINAPI WinMain(HINSTANCE hInst, HINSTANCE, LPSTR, int nCmdShow)
 	if (!RegisterClassEx(&wc)) return false;
 
 	HWND hWnd = CreateWindow(WINDOW_TITLE, WINDOW_TITLE, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, CW_USEDEFAULT, 900, 700,
+		CW_USEDEFAULT, CW_USEDEFAULT, 800, 800,
 		NULL, NULL, wc.hInstance, NULL);
 
 	//--------------------------------
