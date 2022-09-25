@@ -2300,6 +2300,47 @@ void drawForeArmLeft3(float size) {
 	glEnd();
 }
 
+void drawtrapezoid() {
+
+	glMatrixMode(GL_MODELVIEW); //refer to modelview matrix
+	glLoadIdentity(); //Reset modelview matrix 
+	glPushMatrix();
+	glColor3f(1, 0, 0);
+	glBegin(GL_POLYGON);
+	glVertex3f(0, 0, 0);
+	glVertex3f(-0.5, 1, 0);
+	glVertex3f(-1.5, 1, 0);
+	glVertex3f(-2.0, 0, 0);
+
+	glEnd();
+
+	glBegin(GL_POLYGON);
+	glVertex3f(0, 0, 1);
+	glVertex3f(-0.5, 1, 1);
+	glVertex3f(-1.5, 1, 1);
+	glVertex3f(-2.0, 0, 1);
+
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glColor3f(0, 1, 0);
+	glVertex3f(0, 0, 0);
+	glVertex3f(-0.5, 1, 0);
+	glVertex3f(-0.5, 1, 1);
+	glVertex3f(0, 0, 1);
+	glEnd();
+
+	glBegin(GL_QUADS);
+	glColor3f(0, 0, 1);
+	glVertex3f(-1.5, 1, 0);
+	glVertex3f(-1.5, 1, 1);
+	glVertex3f(-2.0, 0, 1);
+	glVertex3f(-2.0, 0, 0);
+	glEnd();
+
+	glPopMatrix();
+}
+
 void display() {
 	glClearColor(0.313725, 0.513725, 0.721568, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  //clear screen
@@ -2381,12 +2422,31 @@ void display() {
 	glPopMatrix();
 
 	glPushMatrix();
-	glColor3f(1.0, 0, 0);
+	glTranslatef(-8.7, 1.5, -1.0);
+	drawShoulderSphere(1.8);
+	glPopMatrix();
+
+	//draw forearm right
+	glPushMatrix();
 	glScalef(2.5, 5.3, 1.4);
-	glTranslatef(-3.95, 0.3, -1.1);
-	drawForeArmLeft2(0.9);
+	glTranslatef(3.75, 0.6, -1.1);
+	drawForeArmLeft1(0.9);
+	glPopMatrix();
+
+	glPushMatrix();
+	glTranslatef(10.4, 1.5, -1.0);
+	drawShoulderSphere(1.8);
+	glPopMatrix();
+
+	// draw wrist
+	glPushMatrix();
+	glRotatef(180, 1, 0,0);
+	drawtrapezoid();
 	glPopMatrix();
 	glPopMatrix();
+
+
+	//draw thigh
 
 
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
