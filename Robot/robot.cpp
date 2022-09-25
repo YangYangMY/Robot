@@ -2141,18 +2141,22 @@ void drawBack() {
 }
 	// ARM
 void drawShoulderSphere(float rad) {
-
+	
+	GLuint Sphere1textureArr[1];
+	Sphere1textureArr[1] = loadTexture("darkblueMetal.bmp");
 	GLUquadricObj* sphere1 = NULL;
 	glPointSize(4);
 	sphere1 = gluNewQuadric();
 	gluQuadricDrawStyle(sphere1, GLU_FILL);
+	gluQuadricTexture(sphere1, true);
 	gluSphere(sphere1, rad, 30, 30);
 	gluDeleteQuadric(sphere1);
-
+	glDeleteTextures(1, &Sphere1textureArr[1]);
 
 }
 
 void drawShoulderCylinder() {
+	
 	GLUquadricObj* Cylinder = NULL;
 	Cylinder = gluNewQuadric();
 	gluQuadricDrawStyle(Cylinder, GLU_FILL);
