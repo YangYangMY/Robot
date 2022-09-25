@@ -10,6 +10,7 @@
 
 int qNo = 1;
 
+float up = 0, down = 0, tspeedd = 0.2;
 float tz = 0, tspeed = 1.0, tx = 0, ty = 0;
 bool isOrtho = true;				// Is orthorgraphic View?
 float ONear = -5.0, OFar = 10.0; //Ortho near and Far
@@ -86,6 +87,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, tz = 10;
+		else if (wParam == 'V')
+			up -= tspeedd;
+		else if (wParam == 'C')
+			down += tspeedd;
 		break;
 
 	default:
@@ -2582,16 +2587,13 @@ void display() {
 
 	//draw arm left
 	glPushMatrix();
+	glRotatef(up, 1, 0, 0);
+	glPushMatrix();
+	glRotatef(down, 1, 0, 0);
 	glScalef(2.5, 5, 1.4);
 	glTranslatef(-4, 1.4, -1.1);
 	drawArmLeft(1.0);
 	glPopMatrix();
-
-	//draw arm right
-	glPushMatrix();
-	glScalef(2.5, 5, 1.4);
-	glTranslatef(3.7, 1.4, -1.1);
-	drawArmLeft(1.0);
 	glPopMatrix();
 
 
@@ -2606,6 +2608,16 @@ void display() {
 	glTranslatef(-8.7, 1.5, -1.0);
 	drawShoulderSphere(1.8);
 	glPopMatrix();
+	glPopMatrix();
+	//draw arm right
+	glPushMatrix();
+	glScalef(2.5, 5, 1.4);
+	glTranslatef(3.7, 1.4, -1.1);
+	drawArmLeft(1.0);
+	glPopMatrix();
+
+
+
 
 	//draw forearm right
 	glPushMatrix();
