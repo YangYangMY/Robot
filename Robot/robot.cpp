@@ -130,7 +130,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				gunspeed = 0, bulletpos1 = -4;
 			}
 			else {
-				gunspeed = 2;
+				gunspeed = 1.3;
 			}
 		}
 		else if (wParam == '9')
