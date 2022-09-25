@@ -35,12 +35,12 @@ BITMAP BMP;					//bitmap structure
 HBITMAP hBMP = NULL;		//bitmap handle
 
 //Lighting
-float a = 0, b = 0, c = 0;
+float a = 0, b = 20, c = 0;
 float angle = 0;
-float amb[3] = { 1, 0, 0 }; //Red Color Ambient Light
-float posA[3] = { 0, 6, 0 }; //Amb Light pos(0, 6, 0) top
+float amb[3] = { 1, 1, 1 }; //Red Color Ambient Light
+float posA[3] = { 0, 20, 0 }; //Amb Light pos(0, 6, 0) top
 float posB[3] = { a,b,c };		//position for lighting{6,0,0}
-float dif[3] = { 1.0,0.0,0.0 };			//green color dif light 
+float dif[3] = { 1.0,1.0,1.0 };			//green color dif light 
 float ambM[3] = { 0.0,0.0,1.0 };		//blue color amb material
 float difM[3] = { 0.0,0.0,1.0 };		//blue color diffuse light
 bool isLightOn = false;
@@ -96,14 +96,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			ptx += ptSpeed;
 		else if (wParam == 'A')
 			ptx -= ptSpeed;
-		else if (wParam == 'B')
+		else if (wParam == 'Q')
 			pry -= prSpeed;
-		else if (wParam == 'M')
+		else if (wParam == 'E')
 			pry += prSpeed;
-		else if (wParam == 'H')
-			pzy -= prSpeed;
-		else if (wParam == 'K')
-			pzy += prSpeed;
 		else if (wParam == 'O')
 			isOrtho = true;
 		else if (wParam == 'P')
@@ -141,7 +137,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == '2')
 		{
 			texture1 = "greenMetal.bmp";
-			texture2 = "blackMetal.bmp";
+			texture2 = "greenMetal.bmp";
 			texture3 = "lightblueMetal.bmp";
 			texture4 = "white3.bmp";
 			texture5 = "red.bmp";
@@ -165,6 +161,18 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			texture5 = "red.bmp";
 			texture6 = "white3.bmp";
 		}
+		else if (wParam == 'J')
+		b += prSpeed, posB[1] += prSpeed;
+		else if (wParam == 'N')
+		b -= prSpeed, posB[1] -= prSpeed;
+		else if (wParam == 'M')
+		a -= prSpeed, posB[0] -= prSpeed;
+		else if (wParam == 'B')
+		a += prSpeed, posB[0] += prSpeed;
+		else if (wParam == 'H')
+		c -= prSpeed, posB[2] -= prSpeed;
+		else if (wParam == 'K')
+		c += prSpeed, posB[2] += prSpeed;
 		else if (wParam == VK_SPACE) {
 		glLoadIdentity();
 		//RESET TEXTURE
@@ -180,6 +188,11 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		tx = 0, ty = 0, tz = 0;
 		ptx = 0, pty = 0, ptz = 0;
 		pry = 0, pxy = 0, pzy = 0;
+		//RESET LIGHTING
+		posB[0] = 0.0;
+		posB[1] = 0.0;
+		posB[2] = 0.0;
+		angle = 0;
 		}
 		break;
 	default:
@@ -2829,11 +2842,21 @@ void display() {
 
 	glLoadIdentity();		//reset to modelview matrix
 	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
-
+	GLuint textureArr[2];		//initialize texture
 	lighting();
 
+	//lighting ball
+	glPushMatrix();
+	textureArr[1] = loadTexture("sun.bmp");
+	glRotatef(angle, 1.0, 1.0, 1.0);
+	glTranslatef(posB[0], posB[1], posB[2]);
+	//light source position
+	DrawSphere(0.5);
+	glDeleteTextures(1, &textureArr[1]);
+	glPopMatrix();
+
 	//--------------------START OF DESIGN-----------------------------------------------------
-	GLuint textureArr[1];		//initialize texture
+	
 	textureArr[0] = loadTexture("sky.bmp");
 	glPushMatrix();
 	DrawSphere(100);
@@ -2883,6 +2906,7 @@ void display() {
 	glPopMatrix();
 
 	glPopMatrix();
+
 	//-----------------------------END OF DESIGN----------------------------------------------------------------
 
 	//Step5: Remove texture info.
