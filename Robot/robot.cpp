@@ -23,6 +23,7 @@ LPCSTR texture3 = "redMetal.bmp";
 LPCSTR texture4 = "lightblueMetal.bmp";
 LPCSTR texture5 = "red.bmp";
 LPCSTR texture6 = "whiteblueMark.bmp";
+float skysize = 100;
 
 //Fanspeeed (CHEST)
 float fanspeed = 5, fanrotate = 0;
@@ -91,7 +92,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 		else if (wParam == 'O')
 			isOrtho = true;
 		else if (wParam == 'P')
-			isOrtho = false;
+			isOrtho = false, skysize = 100;
 		else if (wParam == 'D')
 			ptx += ptSpeed;
 		else if (wParam == 'A')
@@ -2628,7 +2629,7 @@ void display() {
 	
 	textureArr[0] = loadTexture("sky.bmp");
 	glPushMatrix();
-	DrawSphere(100);
+	DrawSphere(skysize);
 	glPopMatrix();
 	glDeleteTextures(1, &textureArr[0]);
 
