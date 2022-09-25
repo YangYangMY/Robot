@@ -133,10 +133,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			pry -= prSpeed;
 		else if (wParam == 'E')
 			pry += prSpeed;
-		else if (wParam == 'O')
-			isOrtho = true;
-		else if (wParam == 'P')
-			isOrtho = false, tz = 10;
 		else if (wParam == 'Z')
 			fanspeed += 10;
 		else if (wParam == 'X')
