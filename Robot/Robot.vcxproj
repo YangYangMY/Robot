@@ -135,13 +135,13 @@
     <Image Include="blackMetal.bmp" />
     <Image Include="darkblueMetal.bmp" />
     <Image Include="greenMetal.bmp" />
-    <Image Include="lightblue.bmp" />
     <Image Include="lightblueMetal.bmp" />
-    <Image Include="metal.bmp" />
+    <Image Include="pink1.bmp" />
     <Image Include="red.bmp" />
     <Image Include="redMetal.bmp" />
     <Image Include="smoke.bmp" />
     <Image Include="water.bmp" />
+    <Image Include="white3.bmp" />
     <Image Include="whiteblueMark.bmp" />
     <Image Include="whitegrey.bmp" />
   </ItemGroup>

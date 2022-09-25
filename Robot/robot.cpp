@@ -4,6 +4,7 @@
 #include <gl/GLU.h>
 #include <corecrt_math.h>
 
+
 #pragma comment (lib, "OpenGL32.lib")
 
 #define WINDOW_TITLE "Robot"
@@ -12,10 +13,16 @@ int qNo = 1;
 
 float tz = 0, tspeed = 1.0, tx = 0, ty = 0;
 bool isOrtho = true;				// Is orthorgraphic View?
-float ONear = -5.0, OFar = 10.0; //Ortho near and Far
-float PNear = 8.0, PFar = 30.0;		//Perspective Near and Far
-float ptx = 0, pty = 0, ptz = 0, ptSpeed = 0.1;   //traslate for projection
-float pry = 0, pxy = 0, pzy = 0, prSpeed = 2;		//rotate whole object
+float ONear = -15.0, OFar = 15.0; //Ortho near and Far
+float PNear = 20.0, PFar = 30.0;		//Perspective Near and Far
+float ptx = 0, pty = 0, ptz = 0, ptSpeed = 1;   //traslate for projection
+float pry = 0, pxy = 0, pzy = 0, prSpeed = 3;		//rotate whole object
+LPCSTR texture1 = "darkblueMetal.bmp";
+LPCSTR texture2 = "blackMetal.bmp";
+LPCSTR texture3 = "redMetal.bmp";
+LPCSTR texture4 = "lightblueMetal.bmp";
+LPCSTR texture5 = "red.bmp";
+LPCSTR texture6 = "whiteblueMark.bmp";
 
 //Fanspeeed (CHEST)
 float fanspeed = 5, fanrotate = 0;
@@ -26,6 +33,18 @@ float smokespeed = 0, smokedrop = -16;
 GLuint texture = 0;			//texture name
 BITMAP BMP;					//bitmap structure
 HBITMAP hBMP = NULL;		//bitmap handle
+
+//Lighting
+float a = 0, b = 0, c = 0;
+float angle = 0;
+float amb[3] = { 1, 0, 0 }; //Red Color Ambient Light
+float posA[3] = { 0, 6, 0 }; //Amb Light pos(0, 6, 0) top
+float posB[3] = { a,b,c };		//position for lighting{6,0,0}
+float dif[3] = { 1.0,0.0,0.0 };			//green color dif light 
+float ambM[3] = { 0.0,0.0,1.0 };		//blue color amb material
+float difM[3] = { 0.0,0.0,1.0 };		//blue color diffuse light
+bool isLightOn = false;
+bool isSphere = true;
 
 LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
@@ -46,7 +65,6 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				if (tz < PFar)
 					tz += tspeed;
 			}
-
 		}
 		else if (wParam == VK_DOWN) {
 			if (isOrtho) {
@@ -57,7 +75,14 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				if (tz > PNear)
 					tz -= tspeed;
 			}
+		}
+		else if (wParam == VK_LEFT) {
+			if (isOrtho) {
+			}
+			else {
+				tz -= tspeed;
 
+			}
 		}
 		else if (wParam == 'W')
 			pty += ptSpeed;
@@ -71,18 +96,10 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			ptx += ptSpeed;
 		else if (wParam == 'A')
 			ptx -= ptSpeed;
-		else if (wParam == 'Q')
-			ptz += ptSpeed;
-		else if (wParam == 'E')
-			ptz -= ptSpeed;
 		else if (wParam == 'B')
 			pry -= prSpeed;
 		else if (wParam == 'M')
 			pry += prSpeed;
-		else if (wParam == 'N')
-			pxy -= prSpeed;
-		else if (wParam == 'J')
-			pxy += prSpeed;
 		else if (wParam == 'H')
 			pzy -= prSpeed;
 		else if (wParam == 'K')
@@ -91,11 +108,11 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 			isOrtho = true;
 		else if (wParam == 'P')
 			isOrtho = false, tz = 10;
-		else if (wParam == '1')
+		else if (wParam == 'Z')
 			fanspeed += 10;
-		else if (wParam == '2')
+		else if (wParam == 'X')
 			fanspeed -= 10;
-		else if (wParam == '3')
+		else if (wParam == 'C')
 		{
 			if (smokespeed >= 0.2)
 			{
@@ -105,8 +122,66 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				smokespeed = 0.2;
 			}
 		}
+		else if(wParam == 'L')
+			if (isLightOn) {
+				isLightOn = false;
+			}
+			else {
+				isLightOn = true;
+			}
+		else if (wParam == '1')
+		{
+			texture1 = "darkblueMetal.bmp";
+			texture2 = "blackMetal.bmp";
+			texture3 = "redMetal.bmp";
+			texture4 = "lightblueMetal.bmp";
+			texture5 = "red.bmp";
+			texture6 = "whiteblueMark.bmp";
+		}
+		else if (wParam == '2')
+		{
+			texture1 = "greenMetal.bmp";
+			texture2 = "blackMetal.bmp";
+			texture3 = "lightblueMetal.bmp";
+			texture4 = "white3.bmp";
+			texture5 = "red.bmp";
+			texture6 = "white3.bmp";
+		}
+		else if (wParam == '3')
+		{
+			texture1 = "blackMetal.bmp";
+			texture2 = "blackMetal.bmp";
+			texture3 = "white3.bmp";
+			texture4 = "white3.bmp";
+			texture5 = "red.bmp";
+			texture6 = "white3.bmp";
+		}
+		else if (wParam == '4')
+		{
+			texture1 = "pink1.bmp";
+			texture2 = "pink1.bmp";
+			texture3 = "white3.bmp";
+			texture4 = "white3.bmp";
+			texture5 = "red.bmp";
+			texture6 = "white3.bmp";
+		}
+		else if (wParam == VK_SPACE) {
+		glLoadIdentity();
+		//RESET TEXTURE
+		texture1 = "darkblueMetal.bmp";
+		texture2 = "blackMetal.bmp";
+		texture3 = "redMetal.bmp";
+		texture4 = "lightblueMetal.bmp";
+		texture5 = "red.bmp";
+		texture6 = "whiteblueMark.bmp";
+		//RESET SMOKE
+		smokespeed = 0, smokedrop = -16;
+		//RESET PROJECTION
+		tx = 0, ty = 0, tz = 0;
+		ptx = 0, pty = 0, ptz = 0;
+		pry = 0, pxy = 0, pzy = 0;
+		}
 		break;
-
 	default:
 		break;
 	}
@@ -151,6 +226,7 @@ void DrawSphere(double r) {
 	GLUquadricObj* sphere = NULL;
 	sphere = gluNewQuadric();
 	gluQuadricDrawStyle(sphere, GLU_FILL);
+	gluQuadricTexture(sphere, true);
 	gluSphere(sphere, r, 30, 30);
 	gluDeleteQuadric(sphere);
 
@@ -447,26 +523,55 @@ void circleFill(float r, int sl, int st) {
 
 //-------------------------------------PROJECTION--------------------------------------------
 void projection() {
-	glMatrixMode(GL_PROJECTION);  //refer to porjetion matrix
-	glLoadIdentity();				// reset to project matrix
 
-	glTranslatef(ptx, pty, ptz);		//translate for projection matrix
-	glRotatef(pry, 0.0, 1.0, 0.0);		//rotate y-axis for projection
-	glRotatef(pxy, 1.0, 0.0, 0.0);		//rotate x-axis for projection
-	glRotatef(pzy, 0.0, 0.0, 1.0);		//rotate x-axis for projection
+	//--------------------------------
+	//	Camera Projection
+	//--------------------------------
+	glMatrixMode(GL_PROJECTION); //refer to projection matrix
+	glLoadIdentity(); //reset projection matrix
 
-	if (isOrtho) {
-		//Ortho View
-		glOrtho(-15.0, 15.0, -15.0, 15.0, ONear, OFar);
+	if (isOrtho)
+	{
+		glRotatef(180, 0, 1, 0);
+		//----- Orthographic view -----
+		glOrtho(-30, 30, -30, 30, ONear, OFar); //left, right, bottom, top, near, far
 	}
-	else {
-		//Perspective View
-	gluPerspective(20, 1.0, -1, 1);
-	glFrustum(-10.0, 10.0, -10.0, 10.0, PNear, PFar);
+	else
+	{
+		glRotatef(180, 0, 1, 0);
+		//----- Perspective view -----
+		gluPerspective(20, 1, -1, 1); //fovy, aspect, near, far
+		glFrustum(-10, 10, -10, 10, PNear, PFar); //xmin, xmax, ymin, ymax, -zmin(need to start from positive), -zmax
+
 	}
-	glTranslatef(tx, 0, tz);
+
+	glRotatef(pry, 0, 1, 0); //Rotate projection y
+	glTranslatef(ptx, pty, 0.0); //Translate projection x & y
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity(); //Reset modelview matrix
+	glTranslatef(tx, 0, tz); //Translate along the x & z axis (Translate for modelview) *
+
 }
 
+void lighting() {
+	if (isLightOn) {
+		glEnable(GL_LIGHTING);
+	}
+	else {
+		glDisable(GL_LIGHTING);
+	}
+
+
+
+	//Light 1: Green color diffuse light at pos(6, 0, 0) right
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, dif);
+	glLightfv(GL_LIGHT1, GL_POSITION, posB);
+	glEnable(GL_LIGHT1);
+
+	glRotatef(angle, 1.0, 1.0, 1.0);
+
+}
 //--------------------------------------TEXTURE--------------------------------------------------
 GLuint loadTexture(LPCSTR filename) {
 	//take from Step 1 
@@ -499,7 +604,7 @@ GLuint loadTexture(LPCSTR filename) {
 //-----------------------------------Start Draw Robot Function----------------------------------------------------------
 void drawWaist() {
 	GLuint waisttextureArr[5];		//initialize texture
-	waisttextureArr[0] = loadTexture("darkblueMetal.bmp");
+	waisttextureArr[0] = loadTexture(texture1);
 
 	//middle DOWN
 	glColor3f(1, 1, 1);
@@ -684,7 +789,7 @@ void drawWaist() {
 
 	glDeleteTextures(1, &waisttextureArr[0]);
 
-	waisttextureArr[1] = loadTexture("whiteblueMark.bmp");
+	waisttextureArr[1] = loadTexture(texture6);
 	//middle UP
 	glColor3f(1, 1, 1);	
 	glPushMatrix();
@@ -851,7 +956,7 @@ void drawWaist() {
 void drawBody() {
 	GLuint bodytextureArr[5];		//initialize texture
 	///0---------------------------------------------------bEHIND------------------------------------------
-	bodytextureArr[0] = loadTexture("lightblueMetal.bmp");
+	bodytextureArr[0] = loadTexture(texture4);
 	glColor3f(1, 1, 1);
 	//------------------------------------middle bottom UP 1
 	glPushMatrix();		
@@ -985,7 +1090,7 @@ void drawBody() {
 	glPopMatrix();
 	glDeleteTextures(1, &bodytextureArr[0]);
 
-	bodytextureArr[3] = loadTexture("blackMetal.bmp");
+	bodytextureArr[3] = loadTexture(texture2);
 	glColor3f(1, 1, 1);
 	glPushMatrix();							//MUSCLE Line 1
 	glTranslatef(-0.45, -1.7, -4.2);
@@ -1007,7 +1112,7 @@ void drawBody() {
 
 
 	//--------------------------------------FRONT ------------------------------------------------
-	bodytextureArr[1] = loadTexture("blackMetal.bmp");
+	bodytextureArr[1] = loadTexture(texture2);
 	//LEFT SIDE
 	glPushMatrix();
 	glRotatef(180, 1, 0, 0);		//back
@@ -1114,7 +1219,7 @@ void drawBody() {
 	//--------------------------------------------MUSCLE-----------------------------------------------------
 	glPushMatrix();
 	glTranslatef(0, 0.1, 0);
-	bodytextureArr[2] = loadTexture("lightblueMetal.bmp");
+	bodytextureArr[2] = loadTexture(texture4);
 	glPushMatrix();							//MUSCLE Middle 1
 	glTranslatef(-0.75, 0.25, -3.4);
 	glRotatef(6, 1, 0, 0);
@@ -1140,7 +1245,7 @@ void drawBody() {
 	glPopMatrix();
 	glDeleteTextures(1, &bodytextureArr[2]);
 
-	bodytextureArr[3] = loadTexture("blackMetal.bmp");
+	bodytextureArr[3] = loadTexture(texture2);
 	glColor3f(1, 1, 1);
 	glPushMatrix();							//MUSCLE Line 1
 	glTranslatef(-0.75, 0.25, -3.5);
@@ -1164,7 +1269,7 @@ void drawBody() {
 
 
 	glPopMatrix();
-	bodytextureArr[2] = loadTexture("blackMetal.bmp");
+	bodytextureArr[2] = loadTexture(texture2);
 	glPushMatrix();							//MUSCLE Left 1
 	glTranslatef(-1.7, 0.2, -10);
 	glRotatef(10, 0, 0, 1);
@@ -1188,7 +1293,7 @@ void drawBody() {
 void drawChest() {
 	GLuint chesttextureArr[5];		//initialize texture
 	//-------------------------------------------Front left
-	chesttextureArr[1] = loadTexture("darkblueMetal.bmp");
+	chesttextureArr[1] = loadTexture(texture1);
 	glBegin(GL_QUADS);				//front
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-0.1, 1, -9);
@@ -1343,7 +1448,7 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[1]);
 	//----------------------------------------Right TUBE near head
 
-	chesttextureArr[2] = loadTexture("whiteblueMark.bmp");
+	chesttextureArr[2] = loadTexture(texture6);
 	glBegin(GL_TRIANGLES);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(3.5, -0.1, -16);
@@ -1439,7 +1544,7 @@ void drawChest() {
 	glVertex3f(-1.8, -1.5, -18.5);
 	glEnd();
 	glDeleteTextures(1, &chesttextureArr[2]);
-	chesttextureArr[0] = loadTexture("whiteblueMark.bmp");
+	chesttextureArr[0] = loadTexture(texture6);
 
 	//-------------------------------------------Front middle
 	glBegin(GL_POLYGON);				//front
@@ -1531,7 +1636,7 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[0]);
 
 	//Draw RED CRYSTAL INFRONT body
-	chesttextureArr[2] = loadTexture("red.bmp");
+	chesttextureArr[2] = loadTexture(texture5);
 	glBegin(GL_QUADS);				//front
 	glTexCoord2f(0.0f, 0.0f);				//middle bottom
 	glVertex3f(-0.1, 1, -9.1);
@@ -1619,7 +1724,7 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[2]);
 
 	//Draw black line INFRONT crystal
-	chesttextureArr[2] = loadTexture("blackMetal.bmp");
+	chesttextureArr[2] = loadTexture(texture2);
 	glPushMatrix();					//middle line
 	glTranslatef(-1, 1, -13.2);
 	drawRectangle(3.5, 0.5, 0.3);
@@ -1640,7 +1745,7 @@ void drawChest() {
 
 	//----------------------------------------------------------CHEST TWO FRONT CIRCLE-------------------------------------
 	//Right SIDE
-	chesttextureArr[3] = loadTexture("blackMetal.bmp");
+	chesttextureArr[3] = loadTexture(texture2);
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	glTranslatef(6, 12.5, 0.1);
@@ -1649,14 +1754,14 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[3]);
 
 
-	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	chesttextureArr[3] = loadTexture(texture6);			//middle
 	glPushMatrix();
 	glTranslatef(6, 0.9, -12.5);
 	DrawSphere(0.35);
 	glPopMatrix();
 	glDeleteTextures(1, &chesttextureArr[3]);
 
-	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	chesttextureArr[3] = loadTexture(texture6);			//fan
 	glPushMatrix();
 	glTranslatef(6, 1, -12.6);			//right
 	glRotatef(fanrotate, 0, 1, 0);
@@ -1672,7 +1777,7 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[3]);
 
 	//LEFT SIDE
-	chesttextureArr[3] = loadTexture("blackMetal.bmp");
+	chesttextureArr[3] = loadTexture(texture2);
 	glPushMatrix();
 	glRotatef(-90, 1, 0, 0);
 	glTranslatef(-4.5, 12.5, 0.1);
@@ -1681,14 +1786,14 @@ void drawChest() {
 	glDeleteTextures(1, &chesttextureArr[3]);
 
 
-	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//middle
+	chesttextureArr[3] = loadTexture(texture6);			//middle
 	glPushMatrix();
 	glTranslatef(-4.5, 0.9, -12.5);
 	DrawSphere(0.35);
 	glPopMatrix();
 	glDeleteTextures(1, &chesttextureArr[3]);
 
-	chesttextureArr[3] = loadTexture("whiteblueMark.bmp");			//fan
+	chesttextureArr[3] = loadTexture(texture6);			//fan
 	glPushMatrix();
 	glTranslatef(-4.5, 1, -12.6);			//right
 	glRotatef(fanrotate, 0, 1, 0);
@@ -1706,7 +1811,7 @@ void drawChest() {
 
 void drawBack() {
 	GLuint backtextureArr[20];		//initialize texture
-	backtextureArr[0] = loadTexture("whiteblueMark.bmp");
+	backtextureArr[0] = loadTexture(texture6);
 
 	//-----------------------------------------------------MIDDLE PART --------------------------------------------------
 	glBegin(GL_QUADS);
@@ -1764,7 +1869,7 @@ void drawBack() {
 
 
 	//-----------------------------------------------------Left Wing --------------------------------------------------
-	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
+	backtextureArr[1] = loadTexture(texture1);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(-1.4, -3, -15);				//inside (FROM behind)
@@ -1840,7 +1945,7 @@ void drawBack() {
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[1]);
 	//---------------------------------------------------red layer
-	backtextureArr[2] = loadTexture("redMetal.bmp");
+	backtextureArr[2] = loadTexture(texture3);
 	glBegin(GL_POLYGON);				//front
 	glTexCoord2f(0.8f, 0.0f);
 	glVertex3f(-14, -3, -24);
@@ -1936,7 +2041,7 @@ void drawBack() {
 
 
 	//-----------------------------------------------------Right Wing --------------------------------------------------
-	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
+	backtextureArr[1] = loadTexture(texture1);
 	glBegin(GL_POLYGON);
 	glTexCoord2f(0.0f, 0.0f);
 	glVertex3f(2.9, -3, -15);				//inside (FROM behind)
@@ -2014,7 +2119,7 @@ void drawBack() {
 	glDeleteTextures(1, &backtextureArr[1]);
 
 	//---------------------------------------------------red layer
-	backtextureArr[2] = loadTexture("redMetal.bmp");
+	backtextureArr[2] = loadTexture(texture3);
 	glBegin(GL_POLYGON);				//front
 	glTexCoord2f(0.8f, 0.0f);
 	glVertex3f(15.5, -3, -24);
@@ -2107,7 +2212,7 @@ void drawBack() {
 	glEnd();
 	glDeleteTextures(1, &backtextureArr[2]);
 	//-------------------------------------------------Right side jetpack---------------------------------
-	backtextureArr[1] = loadTexture("darkblueMetal.bmp");
+	backtextureArr[1] = loadTexture(texture1);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
 	glVertex3f(3, -3.7, -15);
@@ -2317,7 +2422,7 @@ void drawBack() {
 	glDeleteTextures(1, &backtextureArr[1]);
 
 	//------------------------------jetpack middle
-	backtextureArr[3] = loadTexture("red.bmp");
+	backtextureArr[3] = loadTexture(texture5);
 	glPushMatrix();
 	glTranslatef(0.8,-3.2, -19);
 	DrawSphere(0.5);
@@ -2326,7 +2431,7 @@ void drawBack() {
 
 	//-----------------------------------JETPACK ADD DETAILS
 	//jetpack right bottom
-	backtextureArr[4] = loadTexture("whiteblueMark.bmp");
+	backtextureArr[4] = loadTexture(texture6);
 	glBegin(GL_QUADS);
 	glTexCoord2f(0.0f, 0.0f);			//FRONT (FROM BEHIND)
 	glVertex3f(-2.2, -3.8, -16);
@@ -2376,7 +2481,7 @@ void drawBack() {
 	glDeleteTextures(1, &backtextureArr[4]);
 
 	//black line 
-	backtextureArr[5] = loadTexture("blackMetal.bmp");
+	backtextureArr[5] = loadTexture(texture2);
 	glPushMatrix();							//left jetpack bottom
 	glTranslatef(-3.8, -3.85, -18.3);
 	drawRectangle(1.6, 0.1, 0.3);
@@ -2442,7 +2547,7 @@ void drawBack() {
 
 	//------------------------------------------------------------ANIMATION-----------------------------------------------
 	// Smoke Hole
-	backtextureArr[6] = loadTexture("blackMetal.bmp");
+	backtextureArr[6] = loadTexture(texture2);
 
 	glPushMatrix();						//left side
 	glTranslatef(-3, -3, -15);
@@ -2494,10 +2599,20 @@ void display() {
 	glLoadIdentity();		//reset to modelview matrix
 	glTranslatef(tx, ty, tz);		//tranlate along the z-axis
 
-	//--------------------START OF DESIGN-----------------------------------------------------
+	lighting();
 
+	//--------------------START OF DESIGN-----------------------------------------------------
+	GLuint textureArr[1];		//initialize texture
+	textureArr[0] = loadTexture("sky.bmp");
+	glPushMatrix();
+	DrawSphere(100);
+	glPopMatrix();
+	glDeleteTextures(1, &textureArr[0]);
 
 	glPushMatrix();
+	glScalef(0.8, 0.8, 1.5);
+	glTranslatef(0, -20, 0);
+	glRotatef(180, 0, 1, 0);
 	//Draw Waist
 	glRotatef(90, 1.0, 0.0, 0.0);
 	glPushMatrix();
