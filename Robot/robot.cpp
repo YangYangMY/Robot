@@ -2465,7 +2465,7 @@ void drawBack() {
 	DrawCylinder(0.6, 0.6, 0.8);
 	glPopMatrix();
 
-	if (smokedrop >= -12) {
+	if (smokedrop >= -13) {
 		smokedrop = -16;
 	}
 
@@ -2476,7 +2476,7 @@ void drawBack() {
 	glPopMatrix();
 
 
-	if (smokedrop >= -12) {
+	if (smokedrop >= -13) {
 		smokedrop = -16;
 	}
 	smokedrop += smokespeed;
