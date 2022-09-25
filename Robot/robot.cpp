@@ -778,7 +778,7 @@ void Ncube(float sz) {
 	glTexCoord2f(1.0, 1.0);
 	glVertex3f(0.0f, sz, sz);
 	glTexCoord2f(1.0, 0.0);
-	glVertex3f(0.3 * sz, sz, sz); //g
+	glVertex3f(0.3 * sz, sz, sz); 
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(sz, 0.0f, sz);
 	//face4 right
@@ -786,9 +786,9 @@ void Ncube(float sz) {
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(sz, 0.0f, sz);
 	glTexCoord2f(1.0, 1.0);
-	glVertex3f(0.3 * sz, sz, sz); //g
+	glVertex3f(0.3 * sz, sz, sz); 
 	glTexCoord2f(1.0, 0.0);
-	glVertex3f(0.3 * sz, sz, 0.0f);//g
+	glVertex3f(0.3 * sz, sz, 0.0f);
 	glTexCoord2f(0.0, 0.0);
 	glVertex3f(sz, 0.0f, 0.0f);
 	//face5 back
@@ -800,7 +800,7 @@ void Ncube(float sz) {
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.0f, sz, 0.0f);
 	glTexCoord2f(0.0, 0.0);
-	glVertex3f(0.3 * sz, sz, 0.0f);//g
+	glVertex3f(0.3 * sz, sz, 0.0f);
 	//face6 top
 	glTexCoord2f(0.0, 1.0);
 	glVertex3f(0.3 * sz, sz, 0.0f);
@@ -809,7 +809,7 @@ void Ncube(float sz) {
 	glTexCoord2f(1.0, 0.0);
 	glVertex3f(0.0f, sz, sz);
 	glTexCoord2f(0.0, 0.0);
-	glVertex3f(0.3 * sz, sz, sz);//g
+	glVertex3f(0.3 * sz, sz, sz);
 	glEnd();
 }
 
@@ -852,7 +852,6 @@ void feidan() {
 	glPushMatrix();
 	glRotatef(-90, 1.0, 0.0, 0.0);
 	glScalef(0.4, 1.0, 0.1);
-	//glColor3f(0, 1, 1);
 	Ncube(4.0);
 	glPopMatrix();
 	glPopMatrix();
@@ -873,7 +872,6 @@ void feidan() {
 	glPushMatrix();
 	glRotatef(-90, 1.0, 0.0, 0.0);
 	glScalef(0.4, 1.0, 0.1);
-	//glColor3f(0, 1, 1);
 	Ncube(4.0);
 	glPopMatrix();
 	glPopMatrix();
