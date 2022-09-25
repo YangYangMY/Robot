@@ -39,10 +39,10 @@ HBITMAP hBMP = NULL;		//bitmap handle
 //Lighting
 float a = 0, b = 20, c = 0;
 float angle = 0;
-float amb[3] = { 1, 1, 1 }; // Ambient Light
+float amb[3] = { 1, 0, 0 }; // Ambient Light
 float posB[3] = { a,b,c };		//position for lighting{6,0,0}
-float dif[3] = { 1.0,1.0,1.0 };			//green color dif light 
-float ambM[3] = { 0.0,0.0,1.0 };		//blue color amb material
+float dif[3] = { 1.0,0.0,0.0 };			//green color dif light 
+float ambM[3] = { 0.0,0.0,1.0 };		//green color amb material
 bool isLightOn = false;
 bool isDiffuse = true;
 
@@ -127,7 +127,7 @@ LRESULT WINAPI WindowProcedure(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam
 				isLightOn = true;
 			}
 		}
-		else if (wParam == ';')
+		else if (wParam == 'I')
 			if (isDiffuse) {
 				isDiffuse = false;
 			}
@@ -624,7 +624,7 @@ void lighting() {
 	if (isDiffuse) {
 		glDisable(GL_LIGHT2);
 		//Light 1: white color diffuse light at pos(0, 20, 0) right
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, dif);
+		glLightfv(GL_LIGHT1, GL_DIFFUSE, ambM);
 		glLightfv(GL_LIGHT1, GL_POSITION, posB);
 		glEnable(GL_LIGHT1);
 	}
